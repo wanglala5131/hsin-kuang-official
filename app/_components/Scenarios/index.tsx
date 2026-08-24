@@ -11,62 +11,112 @@ export interface ScenarioItem {
   imageUrl: string;
 }
 
+const IMAGE_BASE_URL = process.env.NEXT_PUBLIC_IMAGE_BASE_URL;
+
 const BASE_SCENARIO_IMAGES: ScenarioItem[] = [
-  { id: 'bag1', imageUrl: '/scenarios/bag1.webp', alt: '包袋提把織帶' },
+  {
+    id: 'bag1',
+    imageUrl: `${IMAGE_BASE_URL}/scenarios/bag1.webp`,
+    alt: '包袋提把織帶',
+  },
   {
     id: 'suitcase',
-    imageUrl: '/scenarios/suitcase.webp',
+    imageUrl: `${IMAGE_BASE_URL}/scenarios/suitcase.webp`,
     alt: '行李箱固定束帶',
   },
   {
     id: 'backpack1',
-    imageUrl: '/scenarios/backpack1.webp',
+    imageUrl: `${IMAGE_BASE_URL}/scenarios/backpack1.webp`,
     alt: '後背包織帶配件',
   },
-  { id: 'shoelace1', imageUrl: '/scenarios/shoelace1.webp', alt: '機能鞋帶' },
-  { id: 'pet1', imageUrl: '/scenarios/pet1.webp', alt: '寵物項圈牽繩' },
-  { id: 'camera1', imageUrl: '/scenarios/camera1.webp', alt: '相機背帶' },
+  {
+    id: 'shoelace1',
+    imageUrl: `${IMAGE_BASE_URL}/scenarios/shoelace1.webp`,
+    alt: '機能鞋帶',
+  },
+  {
+    id: 'pet1',
+    imageUrl: `${IMAGE_BASE_URL}/scenarios/pet1.webp`,
+    alt: '寵物項圈牽繩',
+  },
+  {
+    id: 'camera1',
+    imageUrl: `${IMAGE_BASE_URL}/scenarios/camera1.webp`,
+    alt: '相機背帶',
+  },
   {
     id: 'security2',
-    imageUrl: '/scenarios/security2.webp',
+    imageUrl: `${IMAGE_BASE_URL}/scenarios/security2.webp`,
     alt: '安全防護織帶',
   },
 
-  { id: 'gift1', imageUrl: '/scenarios/gift1.webp', alt: '禮品包裝緞帶' },
+  {
+    id: 'gift1',
+    imageUrl: `${IMAGE_BASE_URL}/scenarios/gift1.webp`,
+    alt: '禮品包裝緞帶',
+  },
   {
     id: 'drawstring-clothes',
-    imageUrl: '/scenarios/drawstring-clothes.webp',
+    imageUrl: `${IMAGE_BASE_URL}/scenarios/drawstring-clothes.webp`,
     alt: '服飾抽繩織帶',
   },
-  { id: 'hand1', imageUrl: '/scenarios/hand1.webp', alt: '手提掛繩' },
-  { id: 'lanyard', imageUrl: '/scenarios/lanyard.webp', alt: '識別證掛繩' },
+  {
+    id: 'hand1',
+    imageUrl: `${IMAGE_BASE_URL}/scenarios/hand1.webp`,
+    alt: '手提掛繩',
+  },
+  {
+    id: 'lanyard',
+    imageUrl: `${IMAGE_BASE_URL}/scenarios/lanyard.webp`,
+    alt: '識別證掛繩',
+  },
   {
     id: 'wrist-strap',
-    imageUrl: '/scenarios/wrist strap.webp',
+    imageUrl: `${IMAGE_BASE_URL}/scenarios/wrist strap.webp`,
     alt: '手腕帶',
   },
   {
     id: 'security1',
-    imageUrl: '/scenarios/security1.webp',
+    imageUrl: `${IMAGE_BASE_URL}/scenarios/security1.webp`,
     alt: '安全防護織帶',
   },
   {
     id: 'backpack2',
-    imageUrl: '/scenarios/backpack2.webp',
+    imageUrl: `${IMAGE_BASE_URL}/scenarios/backpack2.webp`,
     alt: '後背包織帶配件',
   },
 
-  { id: 'pet2', imageUrl: '/scenarios/pet2.webp', alt: '寵物項圈牽繩' },
-  { id: 'bag3', imageUrl: '/scenarios/bag3.webp', alt: '包袋提把織帶' },
+  {
+    id: 'pet2',
+    imageUrl: `${IMAGE_BASE_URL}/scenarios/pet2.webp`,
+    alt: '寵物項圈牽繩',
+  },
+  {
+    id: 'bag3',
+    imageUrl: `${IMAGE_BASE_URL}/scenarios/bag3.webp`,
+    alt: '包袋提把織帶',
+  },
   {
     id: 'security3',
-    imageUrl: '/scenarios/security3.webp',
+    imageUrl: `${IMAGE_BASE_URL}/scenarios/security3.webp`,
     alt: '安全防護織帶',
   },
-  { id: 'shoelace2', imageUrl: '/scenarios/shoelace2.webp', alt: '機能鞋帶' },
+  {
+    id: 'shoelace2',
+    imageUrl: `${IMAGE_BASE_URL}/scenarios/shoelace2.webp`,
+    alt: '機能鞋帶',
+  },
 
-  { id: 'camera2', imageUrl: '/scenarios/camera2.webp', alt: '相機背帶' },
-  { id: 'bag2', imageUrl: '/scenarios/bag2.webp', alt: '包袋提把織帶' },
+  {
+    id: 'camera2',
+    imageUrl: `${IMAGE_BASE_URL}/scenarios/camera2.webp`,
+    alt: '相機背帶',
+  },
+  {
+    id: 'bag2',
+    imageUrl: `${IMAGE_BASE_URL}/scenarios/bag2.webp`,
+    alt: '包袋提把織帶',
+  },
 ];
 
 const OFFSET_VARIANTS = [
@@ -115,7 +165,7 @@ export default function Scenarios() {
     >
       <div className="pointer-events-none absolute inset-0 z-0 select-none overflow-hidden">
         <Image
-          src="/speed.webp"
+          src={`${IMAGE_BASE_URL}/speed.webp`}
           alt="情境紋理底圖"
           fill
           sizes="100vw"

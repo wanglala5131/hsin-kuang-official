@@ -5,11 +5,13 @@ import Image from 'next/image';
 
 import BannerIndicator, { CirclePhase } from './BannerIndicator';
 
+const IMAGE_BASE_URL = process.env.NEXT_PUBLIC_IMAGE_BASE_URL;
+
 const bannerImages = [
-  '/banner/braiding-machine.webp',
-  '/banner/high-speed.webp',
-  '/banner/webbing.webp',
-  '/banner/silks.webp',
+  `${IMAGE_BASE_URL}/banner/braiding-machine.webp`,
+  `${IMAGE_BASE_URL}/banner/high-speed.webp`,
+  `${IMAGE_BASE_URL}/banner/webbing.webp`,
+  `${IMAGE_BASE_URL}/banner/silks.webp`,
 ];
 
 const DISPLAY_TIME = 5000; // fill time

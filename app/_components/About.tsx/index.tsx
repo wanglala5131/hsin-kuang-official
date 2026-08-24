@@ -6,6 +6,8 @@ import Link from 'next/link';
 
 import SectionHeader from '@/app/_components/SectionHeader';
 
+const IMAGE_BASE_URL = process.env.NEXT_PUBLIC_IMAGE_BASE_URL;
+
 export default function About() {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
@@ -51,7 +53,7 @@ export default function About() {
         >
           <div className="relative h-[300px] w-full overflow-hidden rounded-r-2xl bg-surface shadow-md md:h-[480px] lg:h-[580px]">
             <Image
-              src="/braiding-machine.webp"
+              src={`${IMAGE_BASE_URL}/braiding-machine.webp`}
               alt="新光織帶 織造機台"
               fill
               className="object-cover object-[20px_70%] transition-transform duration-700 scale-110 hover:scale-115"
@@ -69,7 +71,7 @@ export default function About() {
           >
             <div className="relative aspect-square w-full">
               <Image
-                src="/webbing.webp"
+                src={`${IMAGE_BASE_URL}/webbing.webp`}
                 alt="高品質織帶成品"
                 fill
                 className="scale-130 object-cover transition-transform duration-700 hover:scale-135"

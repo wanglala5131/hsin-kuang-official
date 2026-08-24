@@ -14,102 +14,104 @@ interface StyleSlide {
   alt: string;
 }
 
+const IMAGE_BASE_URL = process.env.NEXT_PUBLIC_IMAGE_BASE_URL;
+
 const STYLE_SLIDES: StyleSlide[] = [
   {
     tag: '各色尼龍帶',
     description: '豐富色彩的尼龍繩，觸感柔軟，可用於手腕帶、拐杖帶等用途。',
-    imageUrl: '/feature/wrist-strap.webp',
+    imageUrl: `${IMAGE_BASE_URL}/feature/wrist-strap.webp`,
     alt: '各色尼龍帶',
   },
   {
     tag: '成衣棉繩',
     description: '多用於衣褲類，材質可選用純棉或特多棉等等較為柔軟的材質。',
-    imageUrl: '/feature/tetoron-cotton.webp',
+    imageUrl: `${IMAGE_BASE_URL}/feature/tetoron-cotton.webp`,
     alt: '成衣棉繩',
   },
   {
     tag: '實心包心帶',
     description: '可用於需要較強拉力的情況，例如寵物帶等用途。',
-    imageUrl: '/feature/solid-core-round-cord.webp',
+    imageUrl: `${IMAGE_BASE_URL}/feature/solid-core-round-cord.webp`,
     alt: '實心包心帶',
   },
   {
     tag: '風管包心帶',
     description: '風管可成為被織帶包覆的材質，讓風管有更漂亮的外觀。',
-    imageUrl: '/feature/air-duct.webp',
+    imageUrl: `${IMAGE_BASE_URL}/feature/air-duct.webp`,
     alt: '風管包心帶',
   },
   {
     tag: '撚繩',
     description: '利用旋轉方式編織而成，能承受較大拉伸強度。',
-    imageUrl: '/feature/twisted.webp',
+    imageUrl: `${IMAGE_BASE_URL}/feature/twisted.webp`,
     alt: '撚繩',
   },
   {
     tag: '子母帶',
     description: '具有特殊編法的織帶，常用於裝飾藝術。',
-    imageUrl: '/feature/子母帶.webp',
+    imageUrl: `${IMAGE_BASE_URL}/feature/子母帶.webp`,
     alt: '子母帶',
   },
   {
     tag: '印刷',
     description: '可自由選擇印刷類型與形式',
-    imageUrl: '/feature/print.webp',
+    imageUrl: `${IMAGE_BASE_URL}/feature/print.webp`,
     alt: '印刷帶',
   },
   {
     tag: '各種編織高速帶',
     description: '可利用不同顏色的絲線，編織出各種形式的高速帶',
-    imageUrl: '/feature/speed-style.webp',
+    imageUrl: `${IMAGE_BASE_URL}/feature/speed-style.webp`,
     alt: '高速帶各式編織',
   },
   // TODO 要補拍
   {
     tag: '各種編織走馬帶',
     description: '可利用不同顏色的絲線，編織出各種形式的走馬帶',
-    imageUrl: '/feature/braiding-style.webp',
+    imageUrl: `${IMAGE_BASE_URL}/feature/braiding-style.webp`,
     alt: '各種編織走馬帶',
   },
   {
     tag: '段染',
     description: '可搭配喜愛的漸層色彩',
-    imageUrl: '/feature/variegated.webp',
+    imageUrl: `${IMAGE_BASE_URL}/feature/variegated.webp`,
     alt: '段染',
   },
   {
     tag: '提花帶',
     description: '可在織帶中加入裝飾與藝術的圖樣，圖樣包含圖騰、Logo等。',
-    imageUrl: '/feature/jacquard.webp',
+    imageUrl: `${IMAGE_BASE_URL}/feature/jacquard.webp`,
     alt: '提花帶',
   },
   {
     tag: '止滑帶',
     description: '加入橡膠防止滑動的特殊織帶。',
-    imageUrl: '/feature/anti-slip.webp',
+    imageUrl: `${IMAGE_BASE_URL}/feature/anti-slip.webp`,
     alt: '止滑帶',
   },
   {
     tag: '彈力圓帶',
     description: '將高彈力橡膠包覆於走馬帶中，使織帶具備彈性。',
-    imageUrl: '/feature/elasticity-cord.webp',
+    imageUrl: `${IMAGE_BASE_URL}/feature/elasticity-cord.webp`,
     alt: '彈力走馬帶',
   },
   {
     tag: '彈力扁帶',
     description: '將高彈力橡膠編入高速帶中，使織帶具備彈性。',
-    imageUrl: '/feature/elasticity-belt.webp',
+    imageUrl: `${IMAGE_BASE_URL}/feature/elasticity-belt.webp`,
     alt: '彈力扁帶',
   },
   {
     tag: '反光帶',
     description: '將具備反光能力的材質編入織帶中，常用於運動衣物、工作服。',
-    imageUrl: '/feature/reflective.webp',
+    imageUrl: `${IMAGE_BASE_URL}/feature/reflective.webp`,
     alt: '反光帶',
   },
   {
     tag: '金蔥/銀蔥',
     description: '將金蔥線或銀蔥線編入織帶中，達到閃亮效果',
-    imageUrl: '/feature/golden:sliver.webp',
+    imageUrl: `${IMAGE_BASE_URL}/feature/golden:sliver.webp`,
     alt: '金蔥 銀蔥',
   },
 ];
@@ -234,7 +236,7 @@ export default function Customization() {
             </div>
             <div className="relative mt-4 h-40 w-full overflow-hidden rounded-lg">
               <Image
-                src="/scenarios/bag1.webp"
+                src={`${IMAGE_BASE_URL}/scenarios/bag1.webp`}
                 alt="織帶的規格與材質"
                 fill
                 sizes="(max-width: 1024px) 100vw, 35vw"
@@ -324,7 +326,7 @@ export default function Customization() {
             <div className="flex flex-col-reverse gap-4 sm:flex-row sm:items-center">
               <div className="relative h-full w-full overflow-hidden rounded-lg sm:h-44 sm:w-1/2">
                 <Image
-                  src="/feature/sewing.webp"
+                  src={`${IMAGE_BASE_URL}/feature/sewing.webp`}
                   alt="後段加工代工"
                   fill
                   sizes="(max-width: 1024px) 100vw, 30vw"
@@ -347,7 +349,7 @@ export default function Customization() {
             className={`${cardSharedClassName} order-1 group relative flex min-h-[190px] flex-col justify-center overflow-hidden lg:order-4 lg:col-span-5`}
           >
             <Image
-              src="/feature/speed.webp"
+              src={`${IMAGE_BASE_URL}/feature/speed.webp`}
               alt="根據用途提供建議"
               fill
               sizes="(max-width: 1024px) 100vw, 35vw"
