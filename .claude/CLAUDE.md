@@ -38,3 +38,4 @@
   - Choose the appropriate variant by path: `@heroicons/react/24/outline` (standard UI/navigation) or `@heroicons/react/24/solid` (active/selected states, emphasis).
   - Style icon size and color directly with Tailwind utility classes (e.g., `className="size-5 text-[#5A1E1E]"`).
 - Responsive Design: Mobile-first approach using standard Tailwind CSS responsive prefixes (`sm:`, `md:`, `lg:`).
+- Images: Always use `next/image` instead of raw `<img>`. Add `unoptimized` when rendering dynamic Blob/Object URLs (`URL.createObjectURL`).

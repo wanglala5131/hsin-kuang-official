@@ -18,7 +18,7 @@ import { LanguageSwitcher } from '@/app/_components/LanguageSwitcher';
 const NAV_LINKS = [
   { name: '產品展示', href: '/products', icon: RectangleGroupIcon },
   { name: '客製服務', href: '/customization', icon: ClipboardDocumentListIcon },
-  { name: '聯絡我們', href: '/about', icon: ChatBubbleLeftEllipsisIcon },
+  { name: '聯絡我們', href: '/contact-us', icon: ChatBubbleLeftEllipsisIcon },
 ];
 
 export default function Header() {
@@ -26,6 +26,13 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
   const isHomePage = pathname === '/';
+
+  const isLinkActive = (href: string) => {
+    if (href === '/') {
+      return pathname === '/';
+    }
+    return pathname === href || pathname.startsWith(`${href}/`);
+  };
 
   useEffect(() => {
     if (!isHomePage) return;
@@ -70,19 +77,30 @@ export default function Header() {
             </Link>
 
             <nav className="hidden md:flex items-center gap-8">
-              {NAV_LINKS.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`text-lg font-medium transition-all relative after:w-0 after:h-[2px] after:bg-brand after:absolute after:left-0 after:bottom-[-2px] after:transition-all ${
-                    isTransparent
-                      ? 'text-background text-shadow-md hover:after:w-full'
-                      : 'text-content-main hover:after:w-full'
-                  }`}
-                >
-                  {link.name}
-                </Link>
-              ))}
+              {NAV_LINKS.map((link) => {
+                const active = isLinkActive(link.href);
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`text-lg font-medium transition-all relative after:h-[2px] after:bg-brand after:absolute after:left-0 after:bottom-[-2px] after:transition-all ${
+                      active
+                        ? 'after:w-full text-brand font-semibold'
+                        : 'after:w-0 hover:after:w-full'
+                    } ${
+                      isTransparent && !active
+                        ? 'text-background text-shadow-md'
+                        : isTransparent && active
+                          ? 'text-white'
+                          : !active
+                            ? 'text-content-main'
+                            : ''
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                );
+              })}
 
               <LanguageSwitcher isTransparent={isTransparent} />
             </nav>
@@ -91,7 +109,7 @@ export default function Header() {
               <button
                 type="button"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className={`p-2 rounded-md transition-colors ${
+                className={`p-2 rounded-md transition-colors cursor-pointer ${
                   isTransparent
                     ? 'text-background hover:bg-background/10'
                     : 'text-content-main hover:bg-border-subtle/40'
@@ -144,7 +162,7 @@ export default function Header() {
           <button
             type="button"
             onClick={() => setIsMobileMenuOpen(false)}
-            className="rounded-md p-2 text-content-main hover:bg-border-subtle/40"
+            className="rounded-md p-2 text-content-main hover:bg-border-subtle/40 cursor-pointer"
             aria-label="關閉選單"
           >
             <XMarkIcon className="size-6" />
@@ -152,15 +170,20 @@ export default function Header() {
         </div>
 
         <div className="flex flex-col gap-8 pt-8">
-          <nav className="flex flex-col gap-5">
+          <nav className="flex flex-col gap-2">
             {NAV_LINKS.map((link) => {
               const Icon = link.icon;
+              const active = isLinkActive(link.href);
               return (
                 <Link
                   key={link.href}
                   href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-xl flex gap-2 py-2 items-center font-medium text-content-main transition-colors hover:text-brand"
+                  className={`text-xl flex gap-3 px-3 py-2.5 rounded-xl items-center font-medium transition-colors ${
+                    active
+                      ? 'bg-brand/10 text-brand font-semibold'
+                      : 'text-content-main hover:text-brand hover:bg-border-subtle/20'
+                  }`}
                 >
                   <Icon className="size-6" />
                   {link.name}

@@ -48,7 +48,7 @@ export function LanguageSwitcher({
       <button
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
-        className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition-all  ${
+        className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition-all cursor-pointer ${
           isTransparent
             ? 'bg-background/30 text-background hover:bg-background/40'
             : 'bg-border-subtle/40 text-content-main hover:bg-border-subtle/60'
