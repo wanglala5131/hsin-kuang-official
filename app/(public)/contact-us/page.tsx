@@ -16,7 +16,7 @@ export default function ContactPage() {
         imageUrl={`${IMAGE_BASE_URL}/hsin-kuang.webp`}
         title="聯絡我們"
         enTitle=" Get in Touch"
-        imageClassName="object-cover object-[0_44%]"
+        imageClassName="object-[0_44%]"
       />
 
       <div className="max-w-6xl py-15 lg:py-20 relative z-20 px-3 md:mx-auto">

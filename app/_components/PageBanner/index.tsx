@@ -11,7 +11,7 @@ export default function PageBanner({
   imageUrl,
   title,
   enTitle = '',
-  imageClassName,
+  imageClassName = '',
 }: Props) {
   return (
     <section className="relative w-full h-30 sm:h-70 flex flex-col items-center justify-center overflow-hidden">
@@ -20,7 +20,7 @@ export default function PageBanner({
         alt="新光織帶"
         fill
         priority
-        className={imageClassName}
+        className={`object-cover ${imageClassName}`}
       />
 
       <div className="absolute inset-0 bg-black/40 bg-gradient-to-b from-black/20 via-transparent/40 to-black/80" />
