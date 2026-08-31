@@ -1,5 +1,5 @@
-import ProductGallery from '@/app/_components/ProductGallery';
-import ShareProductButton from '@/app/_components/ShareProductButton';
+import ProductGallery from '@/app/_components/Collections/ProductGallery';
+import ShareProductButton from '@/app/_components/Collections/ShareProductButton';
 import type { Product } from '@/app/(public)/collections/_data';
 
 interface Props {

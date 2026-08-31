@@ -1,5 +1,5 @@
-import { ContactForm } from '@/app/_components/ContactForm';
-import { ContactInfo } from '@/app/_components/ContactInfo';
+import { ContactForm } from '@/app/_components/ContactUs/ContactForm';
+import { ContactInfo } from '@/app/_components/ContactUs/ContactInfo';
 import PageBanner from '@/app/_components/PageBanner';
 
 export const metadata = {

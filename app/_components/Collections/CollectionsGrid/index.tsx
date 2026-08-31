@@ -3,8 +3,8 @@
 import { useMemo, useState } from 'react';
 import { FunnelIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
-import Pagination from '@/app/_components/Pagination';
-import ProductCard from '@/app/_components/ProductCard';
+import Pagination from '@/app/_components/Collections/Pagination';
+import ProductCard from '@/app/_components/Collections/ProductCard';
 import type { FilterGroup, Product } from '@/app/(public)/collections/_data';
 
 const PAGE_SIZE = 12;

@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ArrowLeftIcon } from '@heroicons/react/24/outline';
 
-import ProductDetail from '@/app/_components/ProductDetail';
+import ProductDetail from '@/app/_components/Collections/ProductDetail';
 import { getProductBySlug, PRODUCTS } from '@/app/(public)/collections/_data';
 
 export function generateStaticParams() {

@@ -1,4 +1,4 @@
-import CollectionsGrid from '@/app/_components/CollectionsGrid';
+import CollectionsGrid from '@/app/_components/Collections/CollectionsGrid';
 import PageBanner from '@/app/_components/PageBanner';
 import { FILTER_GROUPS, PRODUCTS } from '@/app/(public)/collections/_data';
 

@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 
-import ProductDetail from '@/app/_components/ProductDetail';
-import ProductModal from '@/app/_components/ProductModal';
+import ProductDetail from '@/app/_components/Collections/ProductDetail';
+import ProductModal from '@/app/_components/Collections/ProductModal';
 import { getProductBySlug } from '@/app/(public)/collections/_data';
 
 export default async function ProductModalPage({
