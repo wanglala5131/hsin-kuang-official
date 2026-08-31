@@ -1,7 +1,7 @@
-import About from '@/app/_components/About.tsx';
-import Banner from '@/app/_components/Banner';
-import Customization from '@/app/_components/Customization';
-import Scenarios from '@/app/_components/Scenarios';
+import About from '@/app/_components/Home/About.tsx';
+import Banner from '@/app/_components/Home/Banner';
+import Customization from '@/app/_components/Home/Customization';
+import Scenarios from '@/app/_components/Home/Scenarios';
 
 export default function Home() {
   return (

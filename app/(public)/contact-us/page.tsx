@@ -1,5 +1,5 @@
-import { ContactForm } from '@/app/_components/ContactForm';
-import { ContactInfo } from '@/app/_components/ContactInfo';
+import { ContactForm } from '@/app/_components/ContactUs/ContactForm';
+import { ContactInfo } from '@/app/_components/ContactUs/ContactInfo';
 import PageBanner from '@/app/_components/PageBanner';
 
 export const metadata = {
@@ -16,7 +16,7 @@ export default function ContactPage() {
         imageUrl={`${IMAGE_BASE_URL}/hsin-kuang.webp`}
         title="聯絡我們"
         enTitle=" Get in Touch"
-        imageClassName="object-cover object-[0_44%]"
+        imageClassName="object-[0_44%]"
       />
 
       <div className="max-w-6xl py-15 lg:py-20 relative z-20 px-3 md:mx-auto">

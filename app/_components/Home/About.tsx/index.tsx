@@ -101,7 +101,7 @@ export default function About() {
 
           <div className="mt-10 flex justify-end">
             <Link
-              href="/products"
+              href="/collections"
               className="group relative inline-block pb-3 pr-6 text-content-main transition-colors duration-300 hover:text-brand"
             >
               <span className="text-md font-semibold tracking-[0.2em] uppercase">

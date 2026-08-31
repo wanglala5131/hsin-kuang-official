@@ -16,7 +16,7 @@ import {
 import { LanguageSwitcher } from '@/app/_components/LanguageSwitcher';
 
 const NAV_LINKS = [
-  { name: '產品展示', href: '/products', icon: RectangleGroupIcon },
+  { name: '產品展示', href: '/collections', icon: RectangleGroupIcon },
   { name: '客製服務', href: '/customization', icon: ClipboardDocumentListIcon },
   { name: '聯絡我們', href: '/contact-us', icon: ChatBubbleLeftEllipsisIcon },
 ];
