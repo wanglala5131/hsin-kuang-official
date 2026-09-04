@@ -54,3 +54,5 @@ To open a detail route as a modal over its own listing page — e.g. clicking a 
   - Style icon size and color directly with Tailwind utility classes (e.g., `className="size-5 text-brand"`).
 - Responsive Design: Mobile-first approach using standard Tailwind CSS responsive prefixes (`sm:`, `md:`, `lg:`).
 - Images: Always use `next/image` instead of raw `<img>`. Add `unoptimized` when rendering dynamic Blob/Object URLs (`URL.createObjectURL`).
+- Comments: Never transcribe the user's own chat instruction into a code comment (e.g. "user said X is static so we skip the null check"). A comment should explain the code's logic/assumption in normal engineering language, standing on its own without referencing that an instruction was given.
+- Resetting state when a prop changes (e.g. `src`): don't use `useEffect` to call `setState` — ESLint's `react-hooks/set-state-in-effect` flags it. Instead compare the previous value during render and call `setState` conditionally in the render body (React's "adjust state during render" pattern).

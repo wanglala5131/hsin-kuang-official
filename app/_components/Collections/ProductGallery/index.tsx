@@ -1,8 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
+
+import ImageWithSpinner from '@/app/_components/ImageWithSpinner';
 
 interface Props {
   images: string[];
@@ -11,12 +12,10 @@ interface Props {
 
 export default function ProductGallery({ images, alt }: Props) {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
   const hasMultipleImages = images.length > 1;
 
   const goToIndex = (index: number) => {
     if (index === activeIndex) return;
-    setIsLoading(true);
     setActiveIndex(index);
   };
 
@@ -31,22 +30,13 @@ export default function ProductGallery({ images, alt }: Props) {
   return (
     <div>
       <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-warm-gray ring ring-border-subtle/20">
-        <Image
-          key={images[activeIndex]}
+        <ImageWithSpinner
           src={images[activeIndex]}
           alt={alt}
-          fill
           priority
           sizes="(max-width: 1024px) 100vw, 50vw"
           className="object-cover"
-          onLoad={() => setIsLoading(false)}
         />
-
-        {isLoading && (
-          <div className="absolute inset-0 flex items-center justify-center bg-background">
-            <div className="size-8 animate-spin rounded-full border-2 border-border-subtle border-t-content-muted" />
-          </div>
-        )}
 
         {hasMultipleImages && (
           <div className="pointer-events-none absolute inset-y-0 left-2 right-2 flex items-center justify-between">
