@@ -2,9 +2,9 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 
+import ArrowLink from '@/app/_components/ArrowLink';
 import SectionHeader from '@/app/_components/SectionHeader';
 
 interface StyleSlide {
@@ -275,17 +275,7 @@ export default function Customization() {
                   })}
                 </div>
                 <div className="flex justify-end pt-2 pr-2">
-                  <Link
-                    href="/collections"
-                    className="group relative inline-block pb-3 pr-6 text-content-main transition-colors duration-300 hover:text-brand"
-                  >
-                    <span className="text-md font-semibold tracking-[0.2em] uppercase">
-                      看更多
-                    </span>
-                    <span className="pointer-events-none absolute -right-[5px] bottom-[10px] -left-[15px] h-[1.5px] bg-brand transition-transform duration-300 ease-out group-hover:translate-x-1.5">
-                      <span className="absolute right-0 h-[1.5px] w-8 origin-bottom-right rotate-[35deg] bg-brand" />
-                    </span>
-                  </Link>
+                  <ArrowLink href="/collections">看更多</ArrowLink>
                 </div>
               </div>
 
