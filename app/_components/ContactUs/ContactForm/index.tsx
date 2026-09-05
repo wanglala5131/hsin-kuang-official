@@ -15,6 +15,8 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline';
 
+import type { Dictionary } from '@/app/[lang]/dictionaries';
+
 interface FormDataState {
   name: string;
   email: string;
@@ -22,6 +24,10 @@ interface FormDataState {
   company: string;
   intendedUse: string;
   message: string;
+}
+
+interface Props {
+  dict: Dictionary['contactForm'];
 }
 
 const inputBaseStyles =
@@ -46,7 +52,7 @@ function FormField({ id, label, required, children }: FormFieldProps) {
   );
 }
 
-export function ContactForm() {
+export function ContactForm({ dict }: Props) {
   const [formData, setFormData] = useState<FormDataState>({
     name: '',
     email: '',
@@ -109,21 +115,21 @@ export function ContactForm() {
     <div className="pt-10 pb-2 px-2">
       <div className="mb-4">
         <span className="text-xs font-semibold uppercase tracking-wider text-brand block">
-          Send us a message
+          {dict.eyebrow}
         </span>
         <h2 className="mt-2 text-2xl sm:text-3xl font-bold text-content-main font-wen-kai-zh">
-          需求與規格諮詢
+          {dict.heading}
         </h2>
         <p className="mt-2 text-sm text-content-muted leading-relaxed">
-          也歡迎填寫表單來聯絡我們，請詳細填寫您的聯絡方式與織帶規格需求，我們將儘速提供回覆。
+          {dict.description}
           <br />
-          (手機與信箱請至少擇一填寫)
+          {dict.descriptionNote}
         </p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-          <FormField id="name" label="稱呼" required>
+          <FormField id="name" label={dict.nameLabel} required>
             <input
               type="text"
               id="name"
@@ -131,43 +137,43 @@ export function ContactForm() {
               required
               value={formData.name}
               onChange={handleInputChange}
-              placeholder="例：王先生 / 林小姐"
+              placeholder={dict.namePlaceholder}
               className={inputBaseStyles}
             />
           </FormField>
 
-          <FormField id="email" label="信箱">
+          <FormField id="email" label={dict.emailLabel}>
             <input
               type="email"
               id="email"
               name="email"
               value={formData.email}
               onChange={handleInputChange}
-              placeholder="example@company.com"
+              placeholder={dict.emailPlaceholder}
               className={inputBaseStyles}
             />
           </FormField>
 
-          <FormField id="phone" label="電話">
+          <FormField id="phone" label={dict.phoneLabel}>
             <input
               type="tel"
               id="phone"
               name="phone"
               value={formData.phone}
               onChange={handleInputChange}
-              placeholder="例：0912-345-678 / 04-1234567"
+              placeholder={dict.phonePlaceholder}
               className={inputBaseStyles}
             />
           </FormField>
 
-          <FormField id="company" label="公司名稱">
+          <FormField id="company" label={dict.companyLabel}>
             <input
               type="text"
               id="company"
               name="company"
               value={formData.company}
               onChange={handleInputChange}
-              placeholder="例：新光實業有限公司"
+              placeholder={dict.companyPlaceholder}
               className={inputBaseStyles}
             />
           </FormField>
@@ -175,9 +181,9 @@ export function ContactForm() {
 
         <div>
           <div className="flex items-center justify-between mb-1.5">
-            <span className={labelStyles}>上傳參考圖</span>
+            <span className={labelStyles}>{dict.uploadLabel}</span>
             <span className="text-[11px] text-content-muted">
-              至多兩張（JPG / PNG）
+              {dict.uploadHint}
             </span>
           </div>
 
@@ -214,7 +220,7 @@ export function ContactForm() {
                     handleRemoveFile(idx);
                   }}
                   className="absolute top-1 right-1 size-4.5 bg-brand text-white rounded-full flex items-center justify-center hover:opacity-90 cursor-pointer shadow-sm z-20"
-                  aria-label="移除檔案"
+                  aria-label={dict.removeFile}
                 >
                   <XMarkIcon className="size-2.5 stroke-[2.5]" />
                 </button>
@@ -225,7 +231,7 @@ export function ContactForm() {
               <label className="flex flex-col items-center justify-center size-20 border-2 border-dashed border-border-subtle hover:border-brand rounded-xl bg-background cursor-pointer transition-colors group">
                 <ArrowUpTrayIcon className="size-4 text-content-muted group-hover:text-brand" />
                 <span className="mt-1 text-[10px] text-content-muted group-hover:text-brand">
-                  選擇檔案
+                  {dict.chooseFile}
                 </span>
                 <input
                   type="file"
@@ -239,19 +245,19 @@ export function ContactForm() {
           </div>
         </div>
 
-        <FormField id="intendedUse" label="預計用途" required>
+        <FormField id="intendedUse" label={dict.intendedUseLabel} required>
           <input
             type="text"
             id="intendedUse"
             name="intendedUse"
             value={formData.intendedUse}
             onChange={handleInputChange}
-            placeholder="例：成衣織帶、鞋材飾帶、背包提把、工業用織帶"
+            placeholder={dict.intendedUsePlaceholder}
             className={inputBaseStyles}
           />
         </FormField>
 
-        <FormField id="message" label="需求描述" required>
+        <FormField id="message" label={dict.messageLabel} required>
           <textarea
             id="message"
             name="message"
@@ -259,7 +265,7 @@ export function ContactForm() {
             required
             value={formData.message}
             onChange={handleInputChange}
-            placeholder="請填寫織帶規格（寬度、材質、顏色）、預估訂購數量或交期需求..."
+            placeholder={dict.messagePlaceholder}
             className={`${inputBaseStyles} resize-y`}
           />
         </FormField>
@@ -269,7 +275,7 @@ export function ContactForm() {
           disabled={isSubmitting}
           className="inline-flex items-center justify-center px-8 py-3 rounded-xl bg-brand text-white font-medium text-sm hover:bg-brand/90 focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2 transition-all disabled:opacity-50 cursor-pointer shadow-sm"
         >
-          {isSubmitting ? '送出中...' : '送出需求單'}
+          {isSubmitting ? dict.submitting : dict.submit}
         </button>
       </form>
 
@@ -290,7 +296,7 @@ export function ContactForm() {
                 type="button"
                 onClick={() => setPreviewModalImage(null)}
                 className="size-7 rounded-full hover:bg-warm-gray/40 flex items-center justify-center text-content-muted hover:text-content-main transition-colors cursor-pointer"
-                aria-label="關閉"
+                aria-label={dict.closePreview}
               >
                 <XMarkIcon className="size-4.5" />
               </button>

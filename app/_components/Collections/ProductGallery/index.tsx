@@ -4,13 +4,15 @@ import { useState } from 'react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 
 import ImageWithSpinner from '@/app/_components/ImageWithSpinner';
+import type { Dictionary } from '@/app/[lang]/dictionaries';
 
 interface Props {
   images: string[];
   alt: string;
+  dict: Dictionary['collections'];
 }
 
-export default function ProductGallery({ images, alt }: Props) {
+export default function ProductGallery({ images, alt, dict }: Props) {
   const [activeIndex, setActiveIndex] = useState(0);
   const hasMultipleImages = images.length > 1;
 
@@ -43,7 +45,7 @@ export default function ProductGallery({ images, alt }: Props) {
             <button
               type="button"
               onClick={goToPrev}
-              aria-label="上一張圖片"
+              aria-label={dict.prevImage}
               className="pointer-events-auto flex size-9 cursor-pointer items-center justify-center rounded-full bg-black/20 text-white backdrop-blur-sm transition-colors hover:bg-black/35"
             >
               <ChevronLeftIcon className="size-5" />
@@ -51,7 +53,7 @@ export default function ProductGallery({ images, alt }: Props) {
             <button
               type="button"
               onClick={goToNext}
-              aria-label="下一張圖片"
+              aria-label={dict.nextImage}
               className="pointer-events-auto flex size-9 cursor-pointer items-center justify-center rounded-full bg-black/20 text-white backdrop-blur-sm transition-colors hover:bg-black/35"
             >
               <ChevronRightIcon className="size-5" />
@@ -67,7 +69,7 @@ export default function ProductGallery({ images, alt }: Props) {
               key={image}
               type="button"
               onClick={() => goToIndex(index)}
-              aria-label={`前往第 ${index + 1} 張圖片`}
+              aria-label={`${dict.goToImagePrefix}${index + 1}${dict.goToImageSuffix}`}
               className={`size-2 cursor-pointer rounded-full transition-colors ${
                 index === activeIndex ? 'bg-brand' : 'bg-border-subtle'
               }`}

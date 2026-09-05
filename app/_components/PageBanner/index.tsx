@@ -2,6 +2,7 @@ import Image from 'next/image';
 
 interface Props {
   imageUrl: string;
+  imageAlt: string;
   title: string;
   enTitle?: string;
   imageClassName?: string;
@@ -9,6 +10,7 @@ interface Props {
 
 export default function PageBanner({
   imageUrl,
+  imageAlt,
   title,
   enTitle = '',
   imageClassName = '',
@@ -17,7 +19,7 @@ export default function PageBanner({
     <section className="relative w-full h-30 sm:h-70 flex flex-col items-center justify-center overflow-hidden">
       <Image
         src={imageUrl}
-        alt="新光織帶"
+        alt={imageAlt}
         fill
         priority
         className={`object-cover ${imageClassName}`}

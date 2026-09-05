@@ -1,19 +1,26 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 
+import type { Dictionary } from '@/app/[lang]/dictionaries';
+
 interface Props {
   currentPage: number;
   totalPages: number;
   onPageChange: (page: number) => void;
+  dict: Dictionary['collections'];
 }
 
 export default function Pagination({
   currentPage,
   totalPages,
   onPageChange,
+  dict,
 }: Props) {
   if (totalPages <= 1) {
     return (
-      <nav aria-label="分頁" className="mt-10 flex items-center justify-center">
+      <nav
+        aria-label={dict.pagination}
+        className="mt-10 flex items-center justify-center"
+      >
         <span className="flex size-9 items-center justify-center rounded-full bg-brand text-sm font-semibold text-white">
           1
         </span>
@@ -25,14 +32,14 @@ export default function Pagination({
 
   return (
     <nav
-      aria-label="分頁"
+      aria-label={dict.pagination}
       className="mt-10 flex items-center justify-center gap-2"
     >
       <button
         type="button"
         onClick={() => onPageChange(Math.max(1, currentPage - 1))}
         disabled={currentPage === 1}
-        aria-label="上一頁"
+        aria-label={dict.prevPage}
         className="flex size-9 cursor-pointer items-center justify-center rounded-full border border-border-subtle text-content-main transition-colors hover:bg-border-subtle/30 disabled:cursor-not-allowed disabled:opacity-40"
       >
         <ChevronLeftIcon className="size-4" />
@@ -58,7 +65,7 @@ export default function Pagination({
         type="button"
         onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
         disabled={currentPage === totalPages}
-        aria-label="下一頁"
+        aria-label={dict.nextPage}
         className="flex size-9 cursor-pointer items-center justify-center rounded-full border border-border-subtle text-content-main transition-colors hover:bg-border-subtle/30 disabled:cursor-not-allowed disabled:opacity-40"
       >
         <ChevronRightIcon className="size-4" />

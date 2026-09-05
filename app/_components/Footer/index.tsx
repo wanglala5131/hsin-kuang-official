@@ -1,7 +1,16 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function Footer() {
+import { CONTACT_INFO } from '@/app/_lib/contact-info';
+import type { Locale } from '@/app/_lib/locale';
+import type { Dictionary } from '@/app/[lang]/dictionaries';
+
+interface FooterProps {
+  lang: Locale;
+  dict: Dictionary['footer'];
+}
+
+export default function Footer({ lang, dict }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
   const itemClassName =
@@ -15,21 +24,21 @@ export default function Footer() {
     <footer className="relative w-full bg-warm-gray/20 border-t border-border-subtle text-content-main px-6 pt-10 pb-6">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-start gap-8 md:gap-12">
         <div className="flex flex-col gap-2 shrink-0">
-          <Link href="/" className="flex items-center gap-3 group">
+          <Link href={`/${lang}`} className="flex items-center gap-3 group">
             <Image
               src="/logo.svg"
-              alt="新光織帶 Logo"
+              alt={`${dict.brandAlt} Logo`}
               width={60}
               height={60}
               className="h-10 w-auto object-contain"
               priority={false}
             />
             <span className="font-wen-kai-zh text-3xl font-bold tracking-wider text-brand transition-opacity group-hover:opacity-90">
-              新光織帶
+              {dict.brand}
             </span>
           </Link>
           <p className="text-xs text-content-muted tracking-widest pl-0.5">
-            提供各式走馬帶、高速帶等客製化織帶製造
+            {dict.tagline}
           </p>
         </div>
 
@@ -37,41 +46,43 @@ export default function Footer() {
 
         <address className="grid grid-cols-[auto_1fr] md:grid-cols-[auto_1fr_auto_1fr] gap-x-8 gap-y-3 text-sm text-content-main not-italic leading-relaxed">
           <div className={itemClassName}>
-            <span className={labelClassName}>電話</span>
+            <span className={labelClassName}>{dict.phone}</span>
             <div className="text-content-muted">
               <Link
-                href="tel:+88647552626"
+                href={`tel:${CONTACT_INFO.phone.tel}`}
                 className="hover:text-brand transition-colors mr-1"
               >
-                (04) 755-2626
+                {CONTACT_INFO.phone.display[lang]}
               </Link>
               /
               <Link
-                href="tel:+886928552626"
+                href={`tel:${CONTACT_INFO.mobile.tel}`}
                 className="hover:text-brand transition-colors ml-1"
               >
-                0928-552-626
+                {CONTACT_INFO.mobile.display[lang]}
               </Link>
             </div>
           </div>
 
           <div className={itemClassName}>
-            <span className={labelClassName}>E-mail</span>
+            <span className={labelClassName}>{dict.email}</span>
             <Link
-              href="mailto:sue4100035045@gmail.com"
+              href={`mailto:${CONTACT_INFO.email}`}
               className={`${linkClassName} text-content-muted`}
             >
-              sue4100035045@gmail.com
+              {CONTACT_INFO.email}
             </Link>
           </div>
 
           <div className={itemClassName}>
-            <span className={labelClassName}>傳真</span>
-            <span className="text-content-muted">(04) 755-2633</span>
+            <span className={labelClassName}>{dict.fax}</span>
+            <span className="text-content-muted">
+              {CONTACT_INFO.fax.display[lang]}
+            </span>
           </div>
 
           <div className={itemClassName}>
-            <span className={labelClassName}>合作夥伴</span>
+            <span className={labelClassName}>{dict.partner}</span>
             <Link
               href="https://pengsbrand.com/"
               target="_blank"
@@ -83,17 +94,19 @@ export default function Footer() {
           </div>
 
           <div className={itemClassName}>
-            <span className={labelClassName}>地址</span>
+            <span className={labelClassName}>{dict.address}</span>
             <span className="text-content-muted">
-              彰化縣和美鎮彰美路四段135號
+              {CONTACT_INFO.address[lang]}
             </span>
           </div>
         </address>
       </div>
 
       <div className="max-w-7xl mx-auto mt-8 pt-4 border-t border-border-subtle/60 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-content-muted">
-        <p>&copy; {currentYear} 新光織帶 All Rights Reserved.</p>
-        <p className="tracking-wide">Designed & Developed by Sue Wang</p>
+        <p>
+          &copy; {currentYear} {dict.rightsReserved}
+        </p>
+        <p className="tracking-wide">{dict.designedBy}</p>
       </div>
     </footer>
   );

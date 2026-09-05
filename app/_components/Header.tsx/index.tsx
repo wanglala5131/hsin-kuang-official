@@ -8,28 +8,48 @@ import {
   Bars3Icon,
   ChatBubbleLeftEllipsisIcon,
   ClipboardDocumentListIcon,
-  GlobeAltIcon,
   RectangleGroupIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
 
 import { LanguageSwitcher } from '@/app/_components/LanguageSwitcher';
+import type { Locale } from '@/app/_lib/locale';
+import type { Dictionary } from '@/app/[lang]/dictionaries';
 
-const NAV_LINKS = [
-  { name: '產品展示', href: '/collections', icon: RectangleGroupIcon },
-  { name: '客製服務', href: '/customization', icon: ClipboardDocumentListIcon },
-  { name: '聯絡我們', href: '/contact-us', icon: ChatBubbleLeftEllipsisIcon },
-];
+interface HeaderProps {
+  lang: Locale;
+  dict: Dictionary['nav'];
+  languageDict: Dictionary['languageSwitcher'];
+}
 
-export default function Header() {
+export default function Header({ lang, dict, languageDict }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
-  const isHomePage = pathname === '/';
+  const homeHref = `/${lang}`;
+  const isHomePage = pathname === homeHref;
+
+  const NAV_LINKS = [
+    {
+      name: dict.collections,
+      href: `/${lang}/collections`,
+      icon: RectangleGroupIcon,
+    },
+    {
+      name: dict.customization,
+      href: `/${lang}/customization`,
+      icon: ClipboardDocumentListIcon,
+    },
+    {
+      name: dict.contactUs,
+      href: `/${lang}/contact-us`,
+      icon: ChatBubbleLeftEllipsisIcon,
+    },
+  ];
 
   const isLinkActive = (href: string) => {
-    if (href === '/') {
-      return pathname === '/';
+    if (href === homeHref) {
+      return pathname === homeHref;
     }
     return pathname === href || pathname.startsWith(`${href}/`);
   };
@@ -59,7 +79,7 @@ export default function Header() {
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
-            <Link href="/" className="flex items-center gap-3 group">
+            <Link href={homeHref} className="flex items-center gap-3 group">
               <Image
                 src="/logo.svg"
                 width={isTransparent ? 52 : 36}
@@ -72,7 +92,7 @@ export default function Header() {
                   isTransparent ? 'opacity-0' : 'opacity-100'
                 }`}
               >
-                新光織帶
+                {dict.brand}
               </span>
             </Link>
 
@@ -102,7 +122,11 @@ export default function Header() {
                 );
               })}
 
-              <LanguageSwitcher isTransparent={isTransparent} />
+              <LanguageSwitcher
+                lang={lang}
+                dict={languageDict}
+                isTransparent={isTransparent}
+              />
             </nav>
 
             <div className="flex md:hidden items-center gap-2">
@@ -114,7 +138,7 @@ export default function Header() {
                     ? 'text-background hover:bg-background/10'
                     : 'text-content-main hover:bg-border-subtle/40'
                 }`}
-                aria-label="開啟選單"
+                aria-label={dict.openMenu}
               >
                 {isMobileMenuOpen ? (
                   <XMarkIcon className="size-6" />
@@ -144,7 +168,7 @@ export default function Header() {
       >
         <div className="flex items-center justify-between border-b border-border-subtle/60 pb-4">
           <Link
-            href="/"
+            href={homeHref}
             onClick={() => setIsMobileMenuOpen(false)}
             className="flex items-center gap-3"
           >
@@ -155,7 +179,7 @@ export default function Header() {
               alt="hsin kuang logo"
             />
             <span className="text-3xl font-wen-kai-zh font-bold tracking-wider text-brand">
-              新光織帶
+              {dict.brand}
             </span>
           </Link>
 
@@ -163,7 +187,7 @@ export default function Header() {
             type="button"
             onClick={() => setIsMobileMenuOpen(false)}
             className="rounded-md p-2 text-content-main hover:bg-border-subtle/40 cursor-pointer"
-            aria-label="關閉選單"
+            aria-label={dict.closeMenu}
           >
             <XMarkIcon className="size-6" />
           </button>
@@ -193,23 +217,7 @@ export default function Header() {
           </nav>
 
           <div className="border-t border-border-subtle/60 pt-6">
-            <div className="flex items-center gap-2">
-              <GlobeAltIcon className="size-7" />
-              <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  className="rounded-full bg-brand px-3 py-1 text-md font-medium text-background"
-                >
-                  繁體中文
-                </button>
-                <button
-                  type="button"
-                  className="rounded-full bg-border-subtle/40 px-3 py-1 text-md font-medium text-content-main hover:bg-border-subtle/70"
-                >
-                  English
-                </button>
-              </div>
-            </div>
+            <LanguageSwitcher lang={lang} dict={languageDict} />
           </div>
         </div>
       </div>

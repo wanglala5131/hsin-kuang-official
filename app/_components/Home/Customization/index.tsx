@@ -6,113 +6,169 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 
 import ArrowLink from '@/app/_components/ArrowLink';
 import SectionHeader from '@/app/_components/SectionHeader';
+import type { Locale, Localized } from '@/app/_lib/locale';
+import type { Dictionary } from '@/app/[lang]/dictionaries';
 
 interface StyleSlide {
-  tag: string;
-  description: string;
+  tag: Localized<string>;
+  description: Localized<string>;
   imageUrl: string;
-  alt: string;
+  alt: Localized<string>;
 }
 
 const IMAGE_BASE_URL = process.env.NEXT_PUBLIC_IMAGE_BASE_URL;
 
 const STYLE_SLIDES: StyleSlide[] = [
   {
-    tag: '各色尼龍帶',
-    description: '豐富色彩的尼龍繩，觸感柔軟，可用於手腕帶、拐杖帶等用途。',
+    tag: { zh: '各色尼龍帶', en: 'Nylon Cords' },
+    description: {
+      zh: '豐富色彩的尼龍繩，觸感柔軟，可用於手腕帶、拐杖帶等用途。',
+      en: 'Nylon cord in a wide range of colors, soft to the touch — used for wrist straps, cane straps, and more.',
+    },
     imageUrl: `${IMAGE_BASE_URL}/feature/wrist-strap.webp`,
-    alt: '各色尼龍帶',
+    alt: { zh: '各色尼龍帶', en: 'Nylon cords in various colors' },
   },
   {
-    tag: '成衣棉繩',
-    description: '多用於衣褲類，材質可選用純棉或特多棉等等較為柔軟的材質。',
+    tag: { zh: '成衣棉繩', en: 'Cotton Drawstring' },
+    description: {
+      zh: '多用於衣褲類，材質可選用純棉或特多棉等等較為柔軟的材質。',
+      en: 'Mostly used for apparel drawstrings; available in soft materials like pure cotton or cotton-poly blends.',
+    },
     imageUrl: `${IMAGE_BASE_URL}/feature/tetoron-cotton.webp`,
-    alt: '成衣棉繩',
+    alt: { zh: '成衣棉繩', en: 'Cotton drawstring cord' },
   },
   {
-    tag: '實心包心帶',
-    description: '可用於需要較強拉力的情況，例如寵物帶等用途。',
+    tag: { zh: '實心包心帶', en: 'Solid-Core Cord' },
+    description: {
+      zh: '可用於需要較強拉力的情況，例如寵物帶等用途。',
+      en: 'Suited to applications needing higher tensile strength, such as pet leashes.',
+    },
     imageUrl: `${IMAGE_BASE_URL}/feature/solid-core-round-cord.webp`,
-    alt: '實心包心帶',
+    alt: { zh: '實心包心帶', en: 'Solid-core cord' },
   },
   {
-    tag: '風管包心帶',
-    description: '風管可成為被織帶包覆的材質，讓風管有更漂亮的外觀。',
+    tag: { zh: '風管包心帶', en: 'Duct-Covering Webbing' },
+    description: {
+      zh: '風管可成為被織帶包覆的材質，讓風管有更漂亮的外觀。',
+      en: 'Webbing woven around air ducts for a cleaner, more finished appearance.',
+    },
     imageUrl: `${IMAGE_BASE_URL}/feature/air-duct.webp`,
-    alt: '風管包心帶',
+    alt: { zh: '風管包心帶', en: 'Duct-covering webbing' },
   },
   {
-    tag: '撚繩',
-    description: '利用旋轉方式編織而成，能承受較大拉伸強度。',
+    tag: { zh: '撚繩', en: 'Twisted Cord' },
+    description: {
+      zh: '利用旋轉方式編織而成，能承受較大拉伸強度。',
+      en: 'Woven using a twisting technique, able to withstand higher tensile stress.',
+    },
     imageUrl: `${IMAGE_BASE_URL}/feature/twisted.webp`,
-    alt: '撚繩',
+    alt: { zh: '撚繩', en: 'Twisted cord' },
   },
   {
-    tag: '子母帶',
-    description: '具有特殊編法的織帶，常用於裝飾藝術。',
+    tag: { zh: '子母帶', en: 'Two-Tone Webbing' },
+    description: {
+      zh: '具有特殊編法的織帶，常用於裝飾藝術。',
+      en: 'A specially woven webbing pattern, often used for decorative and artistic purposes.',
+    },
     imageUrl: `${IMAGE_BASE_URL}/feature/子母帶.webp`,
-    alt: '子母帶',
+    alt: { zh: '子母帶', en: 'Two-tone woven webbing' },
   },
   {
-    tag: '印刷',
-    description: '可自由選擇印刷類型與形式',
+    tag: { zh: '印刷', en: 'Printing' },
+    description: {
+      zh: '可自由選擇印刷類型與形式',
+      en: 'Choose freely from a variety of printing types and formats.',
+    },
     imageUrl: `${IMAGE_BASE_URL}/feature/print.webp`,
-    alt: '印刷帶',
+    alt: { zh: '印刷帶', en: 'Printed webbing' },
   },
   {
-    tag: '各種編織高速帶',
-    description: '可利用不同顏色的絲線，編織出各種形式的高速帶',
+    tag: { zh: '各種編織高速帶', en: 'Woven High-Speed Webbing' },
+    description: {
+      zh: '可利用不同顏色的絲線，編織出各種形式的高速帶',
+      en: 'Different colored threads can be woven into high-speed webbing in a variety of patterns.',
+    },
     imageUrl: `${IMAGE_BASE_URL}/feature/speed-style.webp`,
-    alt: '高速帶各式編織',
+    alt: {
+      zh: '高速帶各式編織',
+      en: 'Various woven high-speed webbing patterns',
+    },
   },
   // TODO 要補拍
   {
-    tag: '各種編織走馬帶',
-    description: '可利用不同顏色的絲線，編織出各種形式的走馬帶',
+    tag: { zh: '各種編織走馬帶', en: 'Woven Braided Webbing' },
+    description: {
+      zh: '可利用不同顏色的絲線，編織出各種形式的走馬帶',
+      en: 'Different colored threads can be woven into braided webbing in a variety of patterns.',
+    },
     imageUrl: `${IMAGE_BASE_URL}/feature/braiding-style.webp`,
-    alt: '各種編織走馬帶',
+    alt: {
+      zh: '各種編織走馬帶',
+      en: 'Various woven braided webbing patterns',
+    },
   },
   {
-    tag: '段染',
-    description: '可搭配喜愛的漸層色彩',
+    tag: { zh: '段染', en: 'Variegated Dye' },
+    description: {
+      zh: '可搭配喜愛的漸層色彩',
+      en: 'Pair it with your favorite gradient color combinations.',
+    },
     imageUrl: `${IMAGE_BASE_URL}/feature/variegated.webp`,
-    alt: '段染',
+    alt: { zh: '段染', en: 'Variegated dye webbing' },
   },
   {
-    tag: '提花帶',
-    description: '可在織帶中加入裝飾與藝術的圖樣，圖樣包含圖騰、Logo等。',
+    tag: { zh: '提花帶', en: 'Jacquard Webbing' },
+    description: {
+      zh: '可在織帶中加入裝飾與藝術的圖樣，圖樣包含圖騰、Logo等。',
+      en: 'Decorative and artistic patterns — including totems, logos, and more — can be woven directly into the webbing.',
+    },
     imageUrl: `${IMAGE_BASE_URL}/feature/jacquard.webp`,
-    alt: '提花帶',
+    alt: { zh: '提花帶', en: 'Jacquard webbing' },
   },
   {
-    tag: '止滑帶',
-    description: '加入橡膠防止滑動的特殊織帶。',
+    tag: { zh: '止滑帶', en: 'Anti-Slip Webbing' },
+    description: {
+      zh: '加入橡膠防止滑動的特殊織帶。',
+      en: 'A specialty webbing with rubber woven in to prevent slipping.',
+    },
     imageUrl: `${IMAGE_BASE_URL}/feature/anti-slip.webp`,
-    alt: '止滑帶',
+    alt: { zh: '止滑帶', en: 'Anti-slip webbing' },
   },
   {
-    tag: '彈力圓帶',
-    description: '將高彈力橡膠包覆於走馬帶中，使織帶具備彈性。',
+    tag: { zh: '彈力圓帶', en: 'Elastic Round Cord' },
+    description: {
+      zh: '將高彈力橡膠包覆於走馬帶中，使織帶具備彈性。',
+      en: 'High-elasticity rubber is encased within braided webbing to give it stretch.',
+    },
     imageUrl: `${IMAGE_BASE_URL}/feature/elasticity-cord.webp`,
-    alt: '彈力走馬帶',
+    alt: { zh: '彈力走馬帶', en: 'Elastic braided cord' },
   },
   {
-    tag: '彈力扁帶',
-    description: '將高彈力橡膠編入高速帶中，使織帶具備彈性。',
+    tag: { zh: '彈力扁帶', en: 'Elastic Flat Webbing' },
+    description: {
+      zh: '將高彈力橡膠編入高速帶中，使織帶具備彈性。',
+      en: 'High-elasticity rubber is woven into high-speed webbing to give it stretch.',
+    },
     imageUrl: `${IMAGE_BASE_URL}/feature/elasticity-belt.webp`,
-    alt: '彈力扁帶',
+    alt: { zh: '彈力扁帶', en: 'Elastic flat webbing' },
   },
   {
-    tag: '反光帶',
-    description: '將具備反光能力的材質編入織帶中，常用於運動衣物、工作服。',
+    tag: { zh: '反光帶', en: 'Reflective Webbing' },
+    description: {
+      zh: '將具備反光能力的材質編入織帶中，常用於運動衣物、工作服。',
+      en: 'Reflective material is woven into the webbing, commonly used in sportswear and workwear.',
+    },
     imageUrl: `${IMAGE_BASE_URL}/feature/reflective.webp`,
-    alt: '反光帶',
+    alt: { zh: '反光帶', en: 'Reflective webbing' },
   },
   {
-    tag: '金蔥/銀蔥',
-    description: '將金蔥線或銀蔥線編入織帶中，達到閃亮效果',
+    tag: { zh: '金蔥/銀蔥', en: 'Gold/Silver Metallic Thread' },
+    description: {
+      zh: '將金蔥線或銀蔥線編入織帶中，達到閃亮效果',
+      en: 'Gold or silver metallic thread is woven into the webbing for a sparkling effect.',
+    },
     imageUrl: `${IMAGE_BASE_URL}/feature/golden:sliver.webp`,
-    alt: '金蔥 銀蔥',
+    alt: { zh: '金蔥 銀蔥', en: 'Gold and silver metallic thread webbing' },
   },
 ];
 
@@ -159,7 +215,12 @@ function FlowingRibbonCorrectedPattern({
   );
 }
 
-export default function Customization() {
+interface Props {
+  lang: Locale;
+  dict: Dictionary['home']['customization'];
+}
+
+export default function Customization({ lang, dict }: Props) {
   const [isVisible, setIsVisible] = useState(false);
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
@@ -217,8 +278,8 @@ export default function Customization() {
 
       <div className="relative z-10 mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <SectionHeader
-          title="客製化服務"
-          subtitle="Customization Services"
+          title={dict.title}
+          subtitle={dict.subtitle}
           className="mb-12"
         />
 
@@ -227,17 +288,17 @@ export default function Customization() {
             className={`${cardSharedClassName} order-3 flex flex-col justify-between lg:order-1 lg:col-span-4`}
           >
             <div>
-              <h3 className={titleSharedClassName}>織帶的規格與材質</h3>
+              <h3 className={titleSharedClassName}>{dict.specsTitle}</h3>
               <p className={descriptionSharedClassName}>
-                提供特多龍、尼龍、純棉及各種機能紗線等多樣材質的選擇。
+                {dict.specsBody1}
                 <br />
-                顏色、材質、尺寸規格、厚薄度、彈性表現、包心材質與是否具備彈性，皆可依需求高度客製化。
+                {dict.specsBody2}
               </p>
             </div>
             <div className="relative mt-4 h-40 w-full overflow-hidden rounded-lg">
               <Image
                 src={`${IMAGE_BASE_URL}/scenarios/bag1.webp`}
-                alt="織帶的規格與材質"
+                alt={dict.specsImageAlt}
                 fill
                 sizes="(max-width: 1024px) 100vw, 35vw"
                 className="object-cover"
@@ -251,9 +312,9 @@ export default function Customization() {
             <div className="flex flex-col gap-4 sm:flex-row items-center h-full">
               <div className="flex flex-col justify-between sm:w-1/2 h-full">
                 <div>
-                  <h3 className={titleSharedClassName}>多種樣式選擇</h3>
+                  <h3 className={titleSharedClassName}>{dict.stylesTitle}</h3>
                   <p className={descriptionSharedClassName}>
-                    {STYLE_SLIDES[activeSlideIndex].description}
+                    {STYLE_SLIDES[activeSlideIndex].description[lang]}
                   </p>
                 </div>
 
@@ -262,27 +323,29 @@ export default function Customization() {
                     const isActive = idx === activeSlideIndex;
                     return (
                       <button
-                        key={slide.tag}
+                        key={slide.tag.zh}
                         type="button"
                         onClick={() => setActiveSlideIndex(idx)}
                         className={`cursor-pointer rounded-md px-2 py-[1px] text-sm font-medium transition-all duration-200 bg-border-subtle/50 border-2 ${
                           isActive ? 'border-brand' : 'border-transparent'
                         }`}
                       >
-                        {slide.tag}
+                        {slide.tag[lang]}
                       </button>
                     );
                   })}
                 </div>
                 <div className="flex justify-end pt-2 pr-2">
-                  <ArrowLink href="/collections">看更多</ArrowLink>
+                  <ArrowLink href={`/${lang}/collections`}>
+                    {dict.seeMore}
+                  </ArrowLink>
                 </div>
               </div>
 
               <div className="relative h-48 w-full overflow-hidden rounded-lg  sm:h-full sm:w-1/2">
                 <Image
                   src={STYLE_SLIDES[activeSlideIndex].imageUrl}
-                  alt={STYLE_SLIDES[activeSlideIndex].alt}
+                  alt={STYLE_SLIDES[activeSlideIndex].alt[lang]}
                   fill
                   sizes="(max-width: 1024px) 100vw, 30vw"
                   className="object-cover transition-opacity duration-300 ease-out"
@@ -292,7 +355,7 @@ export default function Customization() {
                   <button
                     type="button"
                     onClick={handlePrevSlide}
-                    aria-label="Previous Slide"
+                    aria-label={dict.prevSlide}
                     className="cursor-pointer pointer-events-auto flex h-7 w-7 items-center justify-center rounded-full bg-black/10 text-white backdrop-blur-sm transition-colors hover:bg-black/20"
                   >
                     <ChevronLeftIcon className="size-5" />
@@ -300,7 +363,7 @@ export default function Customization() {
                   <button
                     type="button"
                     onClick={handleNextSlide}
-                    aria-label="Next Slide"
+                    aria-label={dict.nextSlide}
                     className="cursor-pointer pointer-events-auto flex h-7 w-7 items-center justify-center rounded-full bg-black/10 text-white backdrop-blur-sm transition-colors hover:bg-black/20"
                   >
                     <ChevronRightIcon className="size-5" />
@@ -317,7 +380,7 @@ export default function Customization() {
               <div className="relative h-full w-full overflow-hidden rounded-lg sm:h-44 sm:w-1/2">
                 <Image
                   src={`${IMAGE_BASE_URL}/feature/sewing.webp`}
-                  alt="後段加工代工"
+                  alt={dict.finishingImageAlt}
                   fill
                   sizes="(max-width: 1024px) 100vw, 30vw"
                   className="object-cover transition-transform duration-500 ease-out hover:scale-105"
@@ -325,11 +388,11 @@ export default function Customization() {
               </div>
 
               <div className="sm:w-1/2">
-                <h3 className={titleSharedClassName}>後段加工處理</h3>
+                <h3 className={titleSharedClassName}>{dict.finishingTitle}</h3>
                 <p className={descriptionSharedClassName}>
-                  協助各種織帶後段加工處理。
+                  {dict.finishingBody1}
                   <br />
-                  如熱轉印刷、鋼板印刷、指定長度裁切、打頭加工等等。
+                  {dict.finishingBody2}
                 </p>
               </div>
             </div>
@@ -340,18 +403,18 @@ export default function Customization() {
           >
             <Image
               src={`${IMAGE_BASE_URL}/feature/speed.webp`}
-              alt="根據用途提供建議"
+              alt={dict.adviceImageAlt}
               fill
               sizes="(max-width: 1024px) 100vw, 35vw"
               className="object-cover opacity-20"
             />
 
             <div className="relative z-10 text-center">
-              <h3 className={titleSharedClassName}>不清楚材質與做法？</h3>
+              <h3 className={titleSharedClassName}>{dict.unsureTitle}</h3>
               <p className={descriptionSharedClassName}>
-                沒關係，仍然可以直接聯絡我們。
+                {dict.unsureBody1}
                 <br />
-                告訴我們用途與需求，我們將會推薦最佳做法與合適的材質，並提供合理報價
+                {dict.unsureBody2}
               </p>
             </div>
           </div>

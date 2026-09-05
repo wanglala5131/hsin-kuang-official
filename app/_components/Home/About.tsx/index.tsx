@@ -5,10 +5,17 @@ import Image from 'next/image';
 
 import ArrowLink from '@/app/_components/ArrowLink';
 import SectionHeader from '@/app/_components/SectionHeader';
+import type { Locale } from '@/app/_lib/locale';
+import type { Dictionary } from '@/app/[lang]/dictionaries';
 
 const IMAGE_BASE_URL = process.env.NEXT_PUBLIC_IMAGE_BASE_URL;
 
-export default function About() {
+interface Props {
+  lang: Locale;
+  dict: Dictionary['home']['about'];
+}
+
+export default function About({ lang, dict }: Props) {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -40,7 +47,11 @@ export default function About() {
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
         }`}
       >
-        <SectionHeader title="關於我們" subtitle="About Us" className="mb-12" />
+        <SectionHeader
+          title={dict.title}
+          subtitle={dict.subtitle}
+          className="mb-12"
+        />
       </div>
 
       <div className="grid grid-cols-1 items-center gap-14 md:grid-cols-12 md:gap-16">
@@ -54,7 +65,7 @@ export default function About() {
           <div className="relative h-[300px] w-full overflow-hidden rounded-r-2xl bg-surface shadow-md md:h-[480px] lg:h-[580px]">
             <Image
               src={`${IMAGE_BASE_URL}/braiding-machine.webp`}
-              alt="新光織帶 織造機台"
+              alt={dict.machineAlt}
               fill
               className="object-cover object-[20px_70%] transition-transform duration-700 scale-110 hover:scale-115"
               sizes="(max-width: 1024px) 100vw, 50vw"
@@ -72,7 +83,7 @@ export default function About() {
             <div className="relative aspect-square w-full">
               <Image
                 src={`${IMAGE_BASE_URL}/webbing.webp`}
-                alt="高品質織帶成品"
+                alt={dict.productAlt}
                 fill
                 className="scale-130 object-cover transition-transform duration-700 hover:scale-135"
                 sizes="(max-width: 640px) 160px, 260px"
@@ -87,20 +98,21 @@ export default function About() {
           }`}
         >
           <div className="bg-brand/20 text-brand font-bold px-3 py-[2px] rounded-2xl self-start">
-            100% 台灣生產
+            {dict.badge}
           </div>
 
           <h2 className="mt-3 font-wen-kai-zh text-2xl font-bold tracking-tight text-content-main sm:text-3xl md:mt-5 lg:text-4xl">
-            嚴謹品質，專業客製織造
+            {dict.heading}
           </h2>
 
           <p className="mt-4 text-base leading-relaxed text-content-muted sm:text-lg md:mt-6">
-            立足台灣 40
-            年，我們專注於高品質織造與客製服務。憑藉累積數十年的專業經驗，能依據您的實際用途推薦合適的材料與結構，並可同步完成印刷、針車等後續加工，省去多方發包的溝通成本。
+            {dict.body}
           </p>
 
           <div className="mt-10 flex justify-end">
-            <ArrowLink href="/collections">瀏覽產品</ArrowLink>
+            <ArrowLink href={`/${lang}/collections`}>
+              {dict.browseProducts}
+            </ArrowLink>
           </div>
         </div>
       </div>

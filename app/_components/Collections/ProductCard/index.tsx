@@ -2,16 +2,18 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { TagIcon } from '@heroicons/react/24/outline';
 
-import type { Product } from '@/app/(public)/collections/_data';
+import type { Locale } from '@/app/_lib/locale';
+import type { Product } from '@/app/[lang]/(public)/collections/_data';
 
 interface Props {
   product: Product;
+  lang: Locale;
 }
 
-export default function ProductCard({ product }: Props) {
+export default function ProductCard({ product, lang }: Props) {
   return (
     <Link
-      href={`/collections/${product.slug}`}
+      href={`/${lang}/collections/${product.slug}`}
       className="group block rounded-2xl bg-background p-2 shadow-sm ring-1 ring-border-subtle/60 transition-shadow duration-300 hover:shadow-lg sm:p-2.5"
     >
       <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-warm-gray">

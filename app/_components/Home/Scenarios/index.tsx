@@ -4,118 +4,142 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 
 import SectionHeader from '@/app/_components/SectionHeader';
+import type { Locale, Localized } from '@/app/_lib/locale';
+import type { Dictionary } from '@/app/[lang]/dictionaries';
 
 export interface ScenarioItem {
   id: string;
-  alt: string;
+  alt: Localized<string>;
   imageUrl: string;
 }
 
 const IMAGE_BASE_URL = process.env.NEXT_PUBLIC_IMAGE_BASE_URL;
 
+const BAG_HANDLE_ALT: Localized<string> = {
+  zh: '包袋提把織帶',
+  en: 'Bag handle webbing',
+};
+const BACKPACK_ALT: Localized<string> = {
+  zh: '後背包織帶配件',
+  en: 'Backpack webbing hardware',
+};
+const SHOELACE_ALT: Localized<string> = {
+  zh: '機能鞋帶',
+  en: 'Performance shoelace',
+};
+const PET_ALT: Localized<string> = {
+  zh: '寵物項圈牽繩',
+  en: 'Pet collar & leash',
+};
+const CAMERA_ALT: Localized<string> = { zh: '相機背帶', en: 'Camera strap' };
+const SECURITY_ALT: Localized<string> = {
+  zh: '安全防護織帶',
+  en: 'Safety webbing',
+};
+
 const BASE_SCENARIO_IMAGES: ScenarioItem[] = [
   {
     id: 'bag1',
     imageUrl: `${IMAGE_BASE_URL}/scenarios/bag1.webp`,
-    alt: '包袋提把織帶',
+    alt: BAG_HANDLE_ALT,
   },
   {
     id: 'suitcase',
     imageUrl: `${IMAGE_BASE_URL}/scenarios/suitcase.webp`,
-    alt: '行李箱固定束帶',
+    alt: { zh: '行李箱固定束帶', en: 'Luggage strap' },
   },
   {
     id: 'backpack1',
     imageUrl: `${IMAGE_BASE_URL}/scenarios/backpack1.webp`,
-    alt: '後背包織帶配件',
+    alt: BACKPACK_ALT,
   },
   {
     id: 'shoelace1',
     imageUrl: `${IMAGE_BASE_URL}/scenarios/shoelace1.webp`,
-    alt: '機能鞋帶',
+    alt: SHOELACE_ALT,
   },
   {
     id: 'pet1',
     imageUrl: `${IMAGE_BASE_URL}/scenarios/pet1.webp`,
-    alt: '寵物項圈牽繩',
+    alt: PET_ALT,
   },
   {
     id: 'camera1',
     imageUrl: `${IMAGE_BASE_URL}/scenarios/camera1.webp`,
-    alt: '相機背帶',
+    alt: CAMERA_ALT,
   },
   {
     id: 'security2',
     imageUrl: `${IMAGE_BASE_URL}/scenarios/security2.webp`,
-    alt: '安全防護織帶',
+    alt: SECURITY_ALT,
   },
 
   {
     id: 'gift1',
     imageUrl: `${IMAGE_BASE_URL}/scenarios/gift1.webp`,
-    alt: '禮品包裝緞帶',
+    alt: { zh: '禮品包裝緞帶', en: 'Gift wrapping ribbon' },
   },
   {
     id: 'drawstring-clothes',
     imageUrl: `${IMAGE_BASE_URL}/scenarios/drawstring-clothes.webp`,
-    alt: '服飾抽繩織帶',
+    alt: { zh: '服飾抽繩織帶', en: 'Apparel drawstring' },
   },
   {
     id: 'hand1',
     imageUrl: `${IMAGE_BASE_URL}/scenarios/hand1.webp`,
-    alt: '手提掛繩',
+    alt: { zh: '手提掛繩', en: 'Carrying strap' },
   },
   {
     id: 'lanyard',
     imageUrl: `${IMAGE_BASE_URL}/scenarios/lanyard.webp`,
-    alt: '識別證掛繩',
+    alt: { zh: '識別證掛繩', en: 'Lanyard' },
   },
   {
     id: 'wrist-strap',
     imageUrl: `${IMAGE_BASE_URL}/scenarios/wrist strap.webp`,
-    alt: '手腕帶',
+    alt: { zh: '手腕帶', en: 'Wrist strap' },
   },
   {
     id: 'security1',
     imageUrl: `${IMAGE_BASE_URL}/scenarios/security1.webp`,
-    alt: '安全防護織帶',
+    alt: SECURITY_ALT,
   },
   {
     id: 'backpack2',
     imageUrl: `${IMAGE_BASE_URL}/scenarios/backpack2.webp`,
-    alt: '後背包織帶配件',
+    alt: BACKPACK_ALT,
   },
 
   {
     id: 'pet2',
     imageUrl: `${IMAGE_BASE_URL}/scenarios/pet2.webp`,
-    alt: '寵物項圈牽繩',
+    alt: PET_ALT,
   },
   {
     id: 'bag3',
     imageUrl: `${IMAGE_BASE_URL}/scenarios/bag3.webp`,
-    alt: '包袋提把織帶',
+    alt: BAG_HANDLE_ALT,
   },
   {
     id: 'security3',
     imageUrl: `${IMAGE_BASE_URL}/scenarios/security3.webp`,
-    alt: '安全防護織帶',
+    alt: SECURITY_ALT,
   },
   {
     id: 'shoelace2',
     imageUrl: `${IMAGE_BASE_URL}/scenarios/shoelace2.webp`,
-    alt: '機能鞋帶',
+    alt: SHOELACE_ALT,
   },
 
   {
     id: 'camera2',
     imageUrl: `${IMAGE_BASE_URL}/scenarios/camera2.webp`,
-    alt: '相機背帶',
+    alt: CAMERA_ALT,
   },
   {
     id: 'bag2',
     imageUrl: `${IMAGE_BASE_URL}/scenarios/bag2.webp`,
-    alt: '包袋提把織帶',
+    alt: BAG_HANDLE_ALT,
   },
 ];
 
@@ -132,7 +156,12 @@ const OFFSET_VARIANTS = [
   'translate-y-0',
 ];
 
-export default function Scenarios() {
+interface Props {
+  lang: Locale;
+  dict: Dictionary['home']['scenarios'];
+}
+
+export default function Scenarios({ lang, dict }: Props) {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -166,7 +195,7 @@ export default function Scenarios() {
       <div className="pointer-events-none absolute inset-0 z-0 select-none overflow-hidden">
         <Image
           src={`${IMAGE_BASE_URL}/speed.webp`}
-          alt="情境紋理底圖"
+          alt={dict.backgroundAlt}
           fill
           sizes="100vw"
           className="object-cover opacity-15 grayscale contrast-125 blur-[1px]"
@@ -176,8 +205,8 @@ export default function Scenarios() {
       </div>
 
       <SectionHeader
-        title="應用場景"
-        subtitle="Usage Scenarios"
+        title={dict.title}
+        subtitle={dict.subtitle}
         className="mb-6 z-10 relative"
       />
 
@@ -198,7 +227,7 @@ export default function Scenarios() {
                 <div className="relative h-64 w-48 rounded-md shadow-lg duration-300 group-hover:shadow-md sm:h-80 sm:w-60">
                   <Image
                     src={item.imageUrl}
-                    alt={item.alt}
+                    alt={item.alt[lang]}
                     fill
                     loading="lazy"
                     sizes="(max-width: 640px) 192px, 240px"

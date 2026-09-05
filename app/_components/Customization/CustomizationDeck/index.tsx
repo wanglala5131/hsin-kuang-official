@@ -2,16 +2,36 @@
 
 import { useState } from 'react';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
-
-import ArrowLink from '@/app/_components/ArrowLink';
-import ImageWithSpinner from '@/app/_components/ImageWithSpinner';
 import {
-  CUSTOMIZATION_ITEMS,
-  type CustomizationItem,
-} from '@/app/(public)/customization/_data';
+  PaintBrushIcon,
+  RectangleGroupIcon,
+  ScissorsIcon,
+  SparklesIcon,
+  Square3Stack3DIcon,
+  StopCircleIcon,
+  SwatchIcon,
+  TagIcon,
+} from '@heroicons/react/24/solid';
+
+import ImageWithSpinner from '@/app/_components/ImageWithSpinner';
+import type { CustomizationItem } from '@/app/[lang]/(public)/customization/_data';
 
 const PALETTE = ['bg-background', 'bg-warm-gray/30'];
 const CONTENT_PALETTE_DESKTOP = ['md:bg-background', 'md:bg-warm-gray/30'];
+
+// Icons are keyed by the item's stable `id` here (client-side) rather than
+// traveling through the data layer, since function props can't cross the
+// Server -> Client Component boundary.
+const ICONS: Record<string, typeof TagIcon> = {
+  'shape-weave': Square3Stack3DIcon,
+  usage: TagIcon,
+  material: SwatchIcon,
+  'color-size': RectangleGroupIcon,
+  'core-elastic': StopCircleIcon,
+  printing: PaintBrushIcon,
+  finishing: ScissorsIcon,
+  'special-processing': SparklesIcon,
+};
 
 interface TabProps {
   item: CustomizationItem;
@@ -21,7 +41,7 @@ interface TabProps {
 }
 
 function VerticalTab({ item, index, isActive, onSelect }: TabProps) {
-  const Icon = item.icon;
+  const Icon = ICONS[item.id];
 
   return (
     <button
@@ -48,7 +68,7 @@ interface MobileMenuProps {
 function MobileMenu({ items, activeId, onSelect }: MobileMenuProps) {
   const [open, setOpen] = useState(false);
   const activeItem = items.find((item) => item.id === activeId) ?? items[0];
-  const ActiveIcon = activeItem.icon;
+  const ActiveIcon = ICONS[activeItem.id];
 
   return (
     <div className="relative p-3 md:hidden">
@@ -77,7 +97,7 @@ function MobileMenu({ items, activeId, onSelect }: MobileMenuProps) {
           />
           <ul className="absolute inset-x-3 top-full z-20 mt-2 max-h-72 overflow-y-auto rounded-xl border border-border-subtle bg-background shadow-lg">
             {items.map((item) => {
-              const Icon = item.icon;
+              const Icon = ICONS[item.id];
               const isActive = item.id === activeId;
 
               return (
@@ -118,7 +138,7 @@ function ContentPanel({
   // every other panel stays mounted for sizing but must not fetch its image.
   renderImage: boolean;
 }) {
-  const Icon = item.icon;
+  const Icon = ICONS[item.id];
 
   return (
     <div
@@ -163,9 +183,11 @@ function ContentPanel({
   );
 }
 
-export default function CustomizationDeck() {
-  const items = CUSTOMIZATION_ITEMS;
+interface Props {
+  items: CustomizationItem[];
+}
 
+export default function CustomizationDeck({ items }: Props) {
   const [activeId, setActiveId] = useState(items[0].id);
   const [outgoing, setOutgoing] = useState<{
     id: string;

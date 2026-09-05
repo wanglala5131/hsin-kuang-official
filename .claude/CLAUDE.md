@@ -36,9 +36,9 @@ Use them as Tailwind utilities via the token name, e.g. `text-brand`, `bg-warm-g
 
 To open a detail route as a modal over its own listing page — e.g. clicking a card on `/collections` overlays `/collections/[slug]` without leaving the grid, while a direct link/refresh still renders the full standalone page — use Next.js Parallel + Intercepting Routes, scoped to that route only (reference implementation: `/collections`):
 
-- `app/(public)/<route>/layout.tsx`: a nested layout (not the shared `(public)/layout.tsx`) rendering `{children}` and `{modal}` together.
-- `app/(public)/<route>/@modal/default.tsx`: returns `null` — required fallback for hard navigation/refresh, when Next.js can't recover the slot's active state.
-- `app/(public)/<route>/@modal/(.)[slug]/page.tsx`: the intercepted route; wraps the shared content component in a `<Modal>`-style client component that closes via `router.back()`.
+- `app/[lang]/(public)/<route>/layout.tsx`: a nested layout (not the shared `(public)/layout.tsx`) rendering `{children}` and `{modal}` together.
+- `app/[lang]/(public)/<route>/@modal/default.tsx`: returns `null` — required fallback for hard navigation/refresh, when Next.js can't recover the slot's active state.
+- `app/[lang]/(public)/<route>/@modal/(.)[slug]/page.tsx`: the intercepted route; wraps the shared content component in a `<Modal>`-style client component that closes via `router.back()`.
 - Extract the actual content (gallery, details, etc.) into one shared presentational component used by both the modal and the standalone `[slug]/page.tsx`, so they can't drift apart.
 - Keep `@modal` nested inside the specific route's own folder, not the shared `(public)/layout.tsx` — this keeps the slot's blast radius limited to that one route instead of every page under `(public)`.
 
@@ -54,5 +54,5 @@ To open a detail route as a modal over its own listing page — e.g. clicking a 
   - Style icon size and color directly with Tailwind utility classes (e.g., `className="size-5 text-brand"`).
 - Responsive Design: Mobile-first approach using standard Tailwind CSS responsive prefixes (`sm:`, `md:`, `lg:`).
 - Images: Always use `next/image` instead of raw `<img>`. Add `unoptimized` when rendering dynamic Blob/Object URLs (`URL.createObjectURL`).
-- Comments: Never transcribe the user's own chat instruction into a code comment (e.g. "user said X is static so we skip the null check"). A comment should explain the code's logic/assumption in normal engineering language, standing on its own without referencing that an instruction was given.
+- Comments: Only write one when it explains non-obvious logic, reasoning, or an assumption — never to restate what the code already makes clear (e.g. narrating a function's scope or what a block does step by step). Never transcribe the user's own chat instruction into a comment (e.g. "user said X is static so we skip the null check"); phrase the underlying reasoning in normal engineering language instead, standing on its own without referencing that an instruction was given.
 - Resetting state when a prop changes (e.g. `src`): don't use `useEffect` to call `setState` — ESLint's `react-hooks/set-state-in-effect` flags it. Instead compare the previous value during render and call `setState` conditionally in the render body (React's "adjust state during render" pattern).

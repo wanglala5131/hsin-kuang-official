@@ -1,0 +1,163 @@
+{
+  "common": {
+    "brand": "HSIN-KUANG",
+    "brandAlt": "Hsin Kuang"
+  },
+  "nav": {
+    "brand": "HSIN-KUANG",
+    "collections": "Collections",
+    "customization": "Customization",
+    "contactUs": "Contact Us",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "languageSwitcher": {
+    "label": "Switch language",
+    "zh": "繁體中文",
+    "en": "English"
+  },
+  "footer": {
+    "brand": "HSIN-KUANG",
+    "brandAlt": "Hsin Kuang",
+    "tagline": "Custom webbing manufacturer — braided cords, high-speed webbing, and more.",
+    "phone": "Phone",
+    "email": "E-mail",
+    "fax": "Fax",
+    "partner": "Partner",
+    "address": "Address",
+    "rightsReserved": "Hsin Kuang. All Rights Reserved.",
+    "designedBy": "Designed & Developed by Sue Wang"
+  },
+  "home": {
+    "banner": {
+      "since": "since 1986",
+      "brand": "HSIN-KUANG",
+      "subheading": "HSIN KWANG WEBBING MILLS",
+      "sloganLine1": "Four decades of experience,",
+      "sloganLine2": "dedicated to the quality and craft of every kind of webbing.",
+      "scroll": "SCROLL",
+      "imageAlt": "Hsin Kuang product lifestyle image"
+    },
+    "about": {
+      "title": "About Us",
+      "subtitle": "OUR STORY",
+      "badge": "100% Made in Taiwan",
+      "heading": "Meticulous Quality, Custom-Engineered Weaving",
+      "body": "With 40 years rooted in Taiwan, we focus on high-quality weaving and custom service. Drawing on decades of hands-on experience, we recommend the right materials and structures for your actual use case, and can handle printing, sewing, and other finishing in-house — saving you the hassle of coordinating multiple vendors.",
+      "browseProducts": "Browse Products",
+      "machineAlt": "Hsin Kuang weaving looms",
+      "productAlt": "High-quality finished webbing"
+    },
+    "scenarios": {
+      "title": "Usage Scenarios",
+      "subtitle": "WHERE IT'S USED",
+      "backgroundAlt": "Textured background pattern"
+    },
+    "customization": {
+      "title": "Customization Services",
+      "subtitle": "TAILORED FOR YOU",
+      "specsTitle": "Webbing Specs & Materials",
+      "specsBody1": "Choose from a wide range of materials — polyester, nylon, pure cotton, and various performance yarns.",
+      "specsBody2": "Color, material, dimensions, thickness, elasticity, and core filling can all be highly customized to your needs.",
+      "specsImageAlt": "Webbing specs and materials",
+      "stylesTitle": "A Range of Styles",
+      "seeMore": "See More",
+      "finishingTitle": "Finishing & Processing",
+      "finishingBody1": "We handle a full range of finishing work for webbing.",
+      "finishingBody2": "Including heat-transfer printing, plate printing, custom-length cutting, tipping, and more.",
+      "finishingImageAlt": "Finishing and processing work",
+      "unsureTitle": "Not Sure About Materials or Methods?",
+      "unsureBody1": "No problem — just reach out to us directly.",
+      "unsureBody2": "Tell us your intended use and requirements, and we'll recommend the best approach, suitable materials, and a fair quote.",
+      "adviceImageAlt": "Recommendations based on intended use",
+      "prevSlide": "Previous Slide",
+      "nextSlide": "Next Slide"
+    }
+  },
+  "pages": {
+    "root": {
+      "metaTitle": "Hsin Kuang | Custom Webbing & Finishing Services",
+      "metaDescription": "Hsin Kuang Webbing designs and manufactures custom webbing, cords, and finishing services in Taiwan, serving apparel, outdoor, pet, and industrial brands worldwide."
+    },
+    "collections": {
+      "metaTitle": "Collections | HSIN-KUANG Webbing",
+      "metaDescription": "Browse Hsin Kuang's custom webbing and cord products — filter by use case and material to find the specs you need.",
+      "bannerTitle": "Collections",
+      "bannerEnTitle": "OUR PRODUCTS",
+      "backToCollections": "Back to Collections",
+      "notFoundTitle": "Product Not Found | HSIN-KUANG Webbing"
+    },
+    "customization": {
+      "metaTitle": "Customization | HSIN-KUANG Webbing",
+      "metaDescription": "From intended use, weave style, and material to color, size, and finishing — a one-stop custom webbing service.",
+      "bannerTitle": "Customization",
+      "bannerEnTitle": "MADE TO ORDER",
+      "sectionTitle": "Customization Options",
+      "sectionSubtitle": "Select a tab to learn more"
+    },
+    "contactUs": {
+      "metaTitle": "Contact Us | HSIN-KUANG Webbing",
+      "metaDescription": "A professional webbing manufacturer offering consultation and quotes for custom webbing of all kinds.",
+      "bannerTitle": "Contact Us",
+      "bannerEnTitle": "GET IN TOUCH",
+      "mapHl": "en"
+    }
+  },
+  "collections": {
+    "resultCountPrefix": "",
+    "resultCountSuffix": " items",
+    "filter": "Filter",
+    "clearAll": "Clear All",
+    "clearAllFilters": "Clear All Filters",
+    "emptyState": "No products match the selected filters. Try adjusting your selection.",
+    "filterDrawerTitle": "Filters",
+    "closeFilter": "Close filters",
+    "viewResultsPrefix": "View ",
+    "viewResultsSuffix": " results",
+    "pagination": "Pagination",
+    "prevPage": "Previous page",
+    "nextPage": "Next page",
+    "prevImage": "Previous image",
+    "nextImage": "Next image",
+    "goToImagePrefix": "Go to image ",
+    "goToImageSuffix": "",
+    "close": "Close",
+    "shareCopied": "Link copied",
+    "sharePage": "Share product page"
+  },
+  "contactForm": {
+    "eyebrow": "Send us a message",
+    "heading": "Request a Quote & Specs",
+    "description": "Feel free to reach us using the form below — please fill in your contact details and webbing specifications, and we'll get back to you as soon as possible.",
+    "descriptionNote": "(Please provide at least a mobile number or an email)",
+    "nameLabel": "Name",
+    "namePlaceholder": "e.g. Mr. Smith / Ms. Lee",
+    "emailLabel": "Email",
+    "emailPlaceholder": "example@company.com",
+    "phoneLabel": "Phone",
+    "phonePlaceholder": "e.g. 0912-345-678 / 04-1234567",
+    "companyLabel": "Company Name",
+    "companyPlaceholder": "e.g. Hsin Kuang Industrial Co., Ltd.",
+    "uploadLabel": "Upload Reference Image",
+    "uploadHint": "Up to 2 files (JPG / PNG)",
+    "chooseFile": "Choose File",
+    "removeFile": "Remove file",
+    "intendedUseLabel": "Intended Use",
+    "intendedUsePlaceholder": "e.g. apparel webbing, footwear trims, bag handles, industrial webbing",
+    "messageLabel": "Details",
+    "messagePlaceholder": "Please describe the webbing specs (width, material, color), estimated order quantity, or lead time needed...",
+    "submitting": "Submitting...",
+    "submit": "Submit Inquiry",
+    "closePreview": "Close"
+  },
+  "contactInfo": {
+    "eyebrow": "Get in Touch",
+    "heading": "Reach Us Directly",
+    "description": "Feel free to contact us using the information below — we'll connect you with the right person.",
+    "addressLabel": "Factory Address",
+    "phoneLabel": "Phone / Fax",
+    "emailLabel": "Email",
+    "hoursLabel": "Business Hours",
+    "ownerLabel": "Owner"
+  }
+}
