@@ -6,9 +6,10 @@ import { XMarkIcon } from '@heroicons/react/24/outline';
 
 interface Props {
   children: React.ReactNode;
+  closeLabel: string;
 }
 
-export default function ProductModal({ children }: Props) {
+export default function ProductModal({ children, closeLabel }: Props) {
   const router = useRouter();
 
   useEffect(() => {
@@ -38,7 +39,7 @@ export default function ProductModal({ children }: Props) {
         <button
           type="button"
           onClick={() => router.back()}
-          aria-label="關閉"
+          aria-label={closeLabel}
           className="absolute right-4 top-4 z-10 cursor-pointer rounded-full bg-background p-2 text-content-main shadow-sm ring-1 ring-border-subtle/60 transition-colors hover:bg-border-subtle/30"
         >
           <XMarkIcon className="size-5" />

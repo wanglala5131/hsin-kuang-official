@@ -1,17 +1,27 @@
+import {
+  HEADING_FONT_CLASS,
+  HEADING_WEIGHT_CLASS,
+  type Locale,
+} from '@/app/_lib/locale';
+
 interface SectionHeaderProps {
+  lang: Locale;
   title: string;
   subtitle?: string;
   className?: string;
 }
 
 export default function SectionHeader({
+  lang,
   title,
   subtitle,
   className = '',
 }: SectionHeaderProps) {
   return (
     <div className={`flex flex-col items-center text-center ${className}`}>
-      <h3 className="font-wen-kai-zh text-3xl font-bold tracking-widest text-brand sm:text-4xl">
+      <h3
+        className={`text-3xl tracking-widest text-brand sm:text-4xl ${HEADING_FONT_CLASS[lang]} ${HEADING_WEIGHT_CLASS[lang]}`}
+      >
         {title}
       </h3>
 

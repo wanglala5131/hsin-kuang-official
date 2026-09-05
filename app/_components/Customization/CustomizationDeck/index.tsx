@@ -2,16 +2,41 @@
 
 import { useState } from 'react';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
+import {
+  PaintBrushIcon,
+  RectangleGroupIcon,
+  ScissorsIcon,
+  SparklesIcon,
+  Square3Stack3DIcon,
+  StopCircleIcon,
+  SwatchIcon,
+  TagIcon,
+} from '@heroicons/react/24/solid';
 
-import ArrowLink from '@/app/_components/ArrowLink';
 import ImageWithSpinner from '@/app/_components/ImageWithSpinner';
 import {
-  CUSTOMIZATION_ITEMS,
-  type CustomizationItem,
-} from '@/app/(public)/customization/_data';
+  HEADING_FONT_CLASS,
+  HEADING_WEIGHT_CLASS,
+  type Locale,
+} from '@/app/_lib/locale';
+import type { CustomizationItem } from '@/app/[lang]/(public)/customization/_data';
 
 const PALETTE = ['bg-background', 'bg-warm-gray/30'];
 const CONTENT_PALETTE_DESKTOP = ['md:bg-background', 'md:bg-warm-gray/30'];
+
+// Icons are keyed by the item's stable `id` here (client-side) rather than
+// traveling through the data layer, since function props can't cross the
+// Server -> Client Component boundary.
+const ICONS: Record<string, typeof TagIcon> = {
+  'shape-weave': Square3Stack3DIcon,
+  usage: TagIcon,
+  material: SwatchIcon,
+  'color-size': RectangleGroupIcon,
+  'core-elastic': StopCircleIcon,
+  printing: PaintBrushIcon,
+  finishing: ScissorsIcon,
+  'special-processing': SparklesIcon,
+};
 
 interface TabProps {
   item: CustomizationItem;
@@ -21,7 +46,7 @@ interface TabProps {
 }
 
 function VerticalTab({ item, index, isActive, onSelect }: TabProps) {
-  const Icon = item.icon;
+  const Icon = ICONS[item.id];
 
   return (
     <button
@@ -48,7 +73,7 @@ interface MobileMenuProps {
 function MobileMenu({ items, activeId, onSelect }: MobileMenuProps) {
   const [open, setOpen] = useState(false);
   const activeItem = items.find((item) => item.id === activeId) ?? items[0];
-  const ActiveIcon = activeItem.icon;
+  const ActiveIcon = ICONS[activeItem.id];
 
   return (
     <div className="relative p-3 md:hidden">
@@ -77,7 +102,7 @@ function MobileMenu({ items, activeId, onSelect }: MobileMenuProps) {
           />
           <ul className="absolute inset-x-3 top-full z-20 mt-2 max-h-72 overflow-y-auto rounded-xl border border-border-subtle bg-background shadow-lg">
             {items.map((item) => {
-              const Icon = item.icon;
+              const Icon = ICONS[item.id];
               const isActive = item.id === activeId;
 
               return (
@@ -110,21 +135,25 @@ function MobileMenu({ items, activeId, onSelect }: MobileMenuProps) {
 function ContentPanel({
   item,
   index,
+  lang,
   renderImage,
 }: {
   item: CustomizationItem;
   index: number;
+  lang: Locale;
   // Only the shown (or animating-out) panel should fire an image request —
   // every other panel stays mounted for sizing but must not fetch its image.
   renderImage: boolean;
 }) {
-  const Icon = item.icon;
+  const Icon = ICONS[item.id];
 
   return (
     <div
       className={`flex h-full min-h-full flex-col gap-4 border border-warm-gray/30 bg-background p-6 md:border-0 md:p-8 ${CONTENT_PALETTE_DESKTOP[index % CONTENT_PALETTE_DESKTOP.length]}`}
     >
-      <h3 className="flex items-center font-wen-kai-zh text-2xl font-bold text-brand md:text-3xl">
+      <h3
+        className={`flex items-center text-2xl text-brand md:text-3xl ${HEADING_FONT_CLASS[lang]} ${HEADING_WEIGHT_CLASS[lang]}`}
+      >
         <Icon className="mr-2 size-8 shrink-0" />
         {item.title}
       </h3>
@@ -163,9 +192,12 @@ function ContentPanel({
   );
 }
 
-export default function CustomizationDeck() {
-  const items = CUSTOMIZATION_ITEMS;
+interface Props {
+  lang: Locale;
+  items: CustomizationItem[];
+}
 
+export default function CustomizationDeck({ lang, items }: Props) {
   const [activeId, setActiveId] = useState(items[0].id);
   const [outgoing, setOutgoing] = useState<{
     id: string;
@@ -198,7 +230,8 @@ export default function CustomizationDeck() {
           const isActive = item.id === activeId;
           const isOutgoing = outgoing?.id === item.id;
 
-          let animationClass = 'invisible';
+          // Mobile: inactive panels are removed from layout so height tracks the active one; desktop keeps them invisible instead, so height stays constant.
+          let animationClass = 'hidden md:block md:invisible';
           if (outgoing && outgoing.id === item.id) {
             animationClass =
               outgoing.direction === 'forward'
@@ -220,6 +253,7 @@ export default function CustomizationDeck() {
               <ContentPanel
                 item={item}
                 index={index}
+                lang={lang}
                 renderImage={isActive || isOutgoing}
               />
             </div>

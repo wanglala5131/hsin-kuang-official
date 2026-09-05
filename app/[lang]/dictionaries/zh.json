@@ -1,0 +1,163 @@
+{
+  "common": {
+    "brand": "新光織帶",
+    "brandAlt": "新光織帶"
+  },
+  "nav": {
+    "brand": "新光織帶",
+    "collections": "產品展示",
+    "customization": "客製服務",
+    "contactUs": "聯絡我們",
+    "openMenu": "開啟選單",
+    "closeMenu": "關閉選單"
+  },
+  "languageSwitcher": {
+    "label": "切換語言",
+    "zh": "繁體中文",
+    "en": "English"
+  },
+  "footer": {
+    "brand": "新光織帶",
+    "brandAlt": "新光織帶",
+    "tagline": "提供各式走馬帶、高速帶等客製化織帶製造",
+    "phone": "電話",
+    "email": "E-mail",
+    "fax": "傳真",
+    "partner": "合作夥伴",
+    "address": "地址",
+    "rightsReserved": "新光織帶 All Rights Reserved.",
+    "designedBy": "Designed & Developed by Sue Wang"
+  },
+  "home": {
+    "banner": {
+      "since": "since 1986",
+      "brand": "新光織帶",
+      "subheading": "HSIN KWANG WEBBING MILLS",
+      "sloganLine1": "以四十年的經驗",
+      "sloganLine2": "專注於各式織帶的品質與技術",
+      "scroll": "SCROLL",
+      "imageAlt": "新光織帶產品情境圖"
+    },
+    "about": {
+      "title": "關於我們",
+      "subtitle": "About Us",
+      "badge": "100% 台灣生產",
+      "heading": "嚴謹品質，專業客製織造",
+      "body": "立足台灣 40 年，我們專注於高品質織造與客製服務。憑藉累積數十年的專業經驗，能依據您的實際用途推薦合適的材料與結構，並可同步完成印刷、針車等後續加工，省去多方發包的溝通成本。",
+      "browseProducts": "瀏覽產品",
+      "machineAlt": "新光織帶 織造機台",
+      "productAlt": "高品質織帶成品"
+    },
+    "scenarios": {
+      "title": "應用場景",
+      "subtitle": "Usage Scenarios",
+      "backgroundAlt": "情境紋理底圖"
+    },
+    "customization": {
+      "title": "客製化服務",
+      "subtitle": "Customization Services",
+      "specsTitle": "織帶的規格與材質",
+      "specsBody1": "提供特多龍、尼龍、純棉及各種機能紗線等多樣材質的選擇。",
+      "specsBody2": "顏色、材質、尺寸規格、厚薄度、彈性表現、包心材質與是否具備彈性，皆可依需求高度客製化。",
+      "specsImageAlt": "織帶的規格與材質",
+      "stylesTitle": "多種樣式選擇",
+      "seeMore": "看更多",
+      "finishingTitle": "後段加工處理",
+      "finishingBody1": "協助各種織帶後段加工處理。",
+      "finishingBody2": "如熱轉印刷、鋼板印刷、指定長度裁切、打頭加工等等。",
+      "finishingImageAlt": "後段加工代工",
+      "unsureTitle": "不清楚材質與做法？",
+      "unsureBody1": "沒關係，仍然可以直接聯絡我們。",
+      "unsureBody2": "告訴我們用途與需求，我們將會推薦最佳做法與合適的材質，並提供合理報價",
+      "adviceImageAlt": "根據用途提供建議",
+      "prevSlide": "Previous Slide",
+      "nextSlide": "Next Slide"
+    }
+  },
+  "pages": {
+    "root": {
+      "metaTitle": "新光織帶 | 客製化各種織帶、後端加工",
+      "metaDescription": "新光織帶專注於客製化織帶、繩帶製造與後段加工，服務服飾、戶外用品、寵物用品與工業等產業，提供台灣在地 40 年經驗的專業織造服務。"
+    },
+    "collections": {
+      "metaTitle": "產品展示 | 新光織帶 HSIN-KUANG",
+      "metaDescription": "瀏覽新光織帶各式客製化織帶、繩帶產品，依用途、材質篩選您需要的規格。",
+      "bannerTitle": "產品展示",
+      "bannerEnTitle": "Collections",
+      "backToCollections": "返回產品展示",
+      "notFoundTitle": "找不到產品 | 新光織帶 HSIN-KUANG"
+    },
+    "customization": {
+      "metaTitle": "客製服務 | 新光織帶 HSIN-KUANG",
+      "metaDescription": "從用途、外型與織法、材質、顏色尺寸到後端加工，提供一站式織帶客製化服務。",
+      "bannerTitle": "客製服務",
+      "bannerEnTitle": "Customization Service",
+      "sectionTitle": "可選擇的客製化項目",
+      "sectionSubtitle": "點選標籤，來知道更多細節"
+    },
+    "contactUs": {
+      "metaTitle": "聯絡我們 | 新光織帶 HSIN-KUANG",
+      "metaDescription": "專業織帶製造廠，提供各式客製化織帶諮詢與報價。",
+      "bannerTitle": "聯絡我們",
+      "bannerEnTitle": "Get in Touch",
+      "mapHl": "zh-TW"
+    }
+  },
+  "collections": {
+    "resultCountPrefix": "共",
+    "resultCountSuffix": "個",
+    "filter": "篩選",
+    "clearAll": "清除全部",
+    "clearAllFilters": "清除全部篩選",
+    "emptyState": "目前沒有符合篩選條件的產品，請試著調整篩選項目。",
+    "filterDrawerTitle": "篩選條件",
+    "closeFilter": "關閉篩選",
+    "viewResultsPrefix": "查看",
+    "viewResultsSuffix": "個結果",
+    "pagination": "分頁",
+    "prevPage": "上一頁",
+    "nextPage": "下一頁",
+    "prevImage": "上一張圖片",
+    "nextImage": "下一張圖片",
+    "goToImagePrefix": "前往第",
+    "goToImageSuffix": "張圖片",
+    "close": "關閉",
+    "shareCopied": "連結已複製",
+    "sharePage": "分享產品頁面"
+  },
+  "contactForm": {
+    "eyebrow": "Send us a message",
+    "heading": "需求與規格諮詢",
+    "description": "也歡迎填寫表單來聯絡我們，請詳細填寫您的聯絡方式與織帶規格需求，我們將儘速提供回覆。",
+    "descriptionNote": "(手機與信箱請至少擇一填寫)",
+    "nameLabel": "稱呼",
+    "namePlaceholder": "例：王先生 / 林小姐",
+    "emailLabel": "信箱",
+    "emailPlaceholder": "example@company.com",
+    "phoneLabel": "電話",
+    "phonePlaceholder": "例：0912-345-678 / 04-1234567",
+    "companyLabel": "公司名稱",
+    "companyPlaceholder": "例：新光實業有限公司",
+    "uploadLabel": "上傳參考圖",
+    "uploadHint": "至多兩張（JPG / PNG）",
+    "chooseFile": "選擇檔案",
+    "removeFile": "移除檔案",
+    "intendedUseLabel": "預計用途",
+    "intendedUsePlaceholder": "例：成衣織帶、鞋材飾帶、背包提把、工業用織帶",
+    "messageLabel": "需求描述",
+    "messagePlaceholder": "請填寫織帶規格（寬度、材質、顏色）、預估訂購數量或交期需求...",
+    "submitting": "送出中...",
+    "submit": "送出",
+    "closePreview": "關閉"
+  },
+  "contactInfo": {
+    "eyebrow": "Get in Touch",
+    "heading": "即時諮詢",
+    "description": "歡迎透過以下資訊我們聯絡，我們將為您安排專人接洽。",
+    "addressLabel": "工廠地址",
+    "phoneLabel": "電話 / 傳真",
+    "emailLabel": "電子信箱",
+    "hoursLabel": "營業時間",
+    "ownerLabel": "負責人"
+  }
+}

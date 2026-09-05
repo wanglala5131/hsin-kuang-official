@@ -1,5 +1,4 @@
 import {
-  // ChatBubbleLeftRightIcon,
   ClockIcon,
   EnvelopeIcon,
   MapPinIcon,
@@ -7,60 +6,18 @@ import {
   UserIcon,
 } from '@heroicons/react/24/outline';
 
-interface ContactDetail {
-  id: string;
-  icon: typeof MapPinIcon;
-  label: string;
-  value: string;
-  subValue?: string;
-  href?: string;
-  subValueHref?: string;
-}
+import { CONTACT_INFO } from '@/app/_lib/contact-info';
+import {
+  HEADING_FONT_CLASS,
+  HEADING_WEIGHT_CLASS,
+  type Locale,
+} from '@/app/_lib/locale';
+import type { Dictionary } from '@/app/[lang]/dictionaries';
 
-const contactDetails: ContactDetail[] = [
-  {
-    id: 'address',
-    icon: MapPinIcon,
-    label: '工廠地址',
-    value: '彰化縣和美鎮彰美路四段135號',
-  },
-  {
-    id: 'phone',
-    icon: PhoneIcon,
-    label: '電話 / 傳真',
-    value: 'TEL: 04-7552626',
-    subValue: 'FAX: 04-7552633',
-    href: 'tel:047552626',
-  },
-  {
-    id: 'email',
-    icon: EnvelopeIcon,
-    label: '電子信箱',
-    value: 'sue4100035035@gmail.com',
-    href: 'mailto:sue4100035035@gmail.com',
-  },
-  // {
-  //   id: 'line',
-  //   icon: ChatBubbleLeftRightIcon,
-  //   label: '官方 LINE',
-  //   value: '@hsinkuang',
-  //   href: 'https://line.me/R/ti/p/@hsinkuang',
-  // },
-  {
-    id: 'hours',
-    icon: ClockIcon,
-    label: '營業時間',
-    value: '週一至週五 08:00 - 17:00',
-  },
-  {
-    id: 'head',
-    icon: UserIcon,
-    label: '負責人',
-    value: '王為正',
-    subValue: '0928-525-626',
-    subValueHref: 'tel:0928552626',
-  },
-];
+interface Props {
+  lang: Locale;
+  dict: Dictionary['contactInfo'];
+}
 
 interface TextOrLinkProps {
   text: string;
@@ -88,18 +45,58 @@ function ContactValueItem({ text, href }: TextOrLinkProps) {
   );
 }
 
-export function ContactInfo() {
+export function ContactInfo({ lang, dict }: Props) {
+  const contactDetails = [
+    {
+      id: 'address',
+      icon: MapPinIcon,
+      label: dict.addressLabel,
+      value: CONTACT_INFO.address[lang],
+    },
+    {
+      id: 'phone',
+      icon: PhoneIcon,
+      label: dict.phoneLabel,
+      value: `TEL: ${CONTACT_INFO.phone.display[lang]}`,
+      subValue: `FAX: ${CONTACT_INFO.fax.display[lang]}`,
+      href: `tel:${CONTACT_INFO.phone.tel}`,
+    },
+    {
+      id: 'email',
+      icon: EnvelopeIcon,
+      label: dict.emailLabel,
+      value: CONTACT_INFO.email,
+      href: `mailto:${CONTACT_INFO.email}`,
+    },
+    {
+      id: 'hours',
+      icon: ClockIcon,
+      label: dict.hoursLabel,
+      value: CONTACT_INFO.hours[lang],
+    },
+    {
+      id: 'head',
+      icon: UserIcon,
+      label: dict.ownerLabel,
+      value: CONTACT_INFO.owner.name[lang],
+      subValue: CONTACT_INFO.owner.mobile.display[lang],
+      subValueHref: `tel:${CONTACT_INFO.owner.mobile.tel}`,
+    },
+  ];
+
   return (
     <div className="rounded-2xl p-6 sm:p-8 lg:p-10 flex flex-col bg-warm-gray ring ring-border-subtle/20 shadow-sm h-full">
       <div>
         <span className="text-xs font-semibold uppercase tracking-wider text-brand block">
-          Get in Touch
+          {dict.eyebrow}
         </span>
-        <h3 className="mt-2 text-2xl sm:text-3xl font-bold font-wen-kai-zh text-content-main">
-          即時諮詢
+        <h3
+          className={`mt-2 text-2xl sm:text-3xl text-content-main ${HEADING_FONT_CLASS[lang]} ${HEADING_WEIGHT_CLASS[lang]}`}
+        >
+          {dict.heading}
         </h3>
-        <p className="mt-2 text-sm content-muted leading-relaxed">
-          歡迎透過以下資訊我們聯絡，我們將為您安排專人接洽。
+        <p className="mt-2 text-sm text-content-muted leading-relaxed">
+          {dict.description}
         </p>
       </div>
 

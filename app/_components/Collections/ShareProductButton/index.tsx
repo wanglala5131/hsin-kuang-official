@@ -3,11 +3,14 @@
 import { useState } from 'react';
 import { ShareIcon } from '@heroicons/react/24/outline';
 
+import type { Dictionary } from '@/app/[lang]/dictionaries';
+
 interface Props {
   title: string;
+  dict: Dictionary['collections'];
 }
 
-export default function ShareProductButton({ title }: Props) {
+export default function ShareProductButton({ title, dict }: Props) {
   const [copied, setCopied] = useState(false);
 
   const handleShare = async () => {
@@ -38,7 +41,7 @@ export default function ShareProductButton({ title }: Props) {
       className="inline-flex cursor-pointer items-center justify-center gap-2 rounded-full border border-brand px-5 py-2.5 text-sm font-semibold text-brand transition-colors hover:bg-brand/10"
     >
       <ShareIcon className="size-4" />
-      {copied ? '連結已複製' : '分享產品頁面'}
+      {copied ? dict.shareCopied : dict.sharePage}
     </button>
   );
 }

@@ -1,15 +1,17 @@
 import ProductGallery from '@/app/_components/Collections/ProductGallery';
 import ShareProductButton from '@/app/_components/Collections/ShareProductButton';
-import type { Product } from '@/app/(public)/collections/_data';
+import type { Product } from '@/app/[lang]/(public)/collections/_data';
+import type { Dictionary } from '@/app/[lang]/dictionaries';
 
 interface Props {
   product: Product;
+  dict: Dictionary['collections'];
 }
 
-export default function ProductDetail({ product }: Props) {
+export default function ProductDetail({ product, dict }: Props) {
   return (
     <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-12">
-      <ProductGallery images={product.images} alt={product.title} />
+      <ProductGallery images={product.images} alt={product.title} dict={dict} />
 
       <div className="flex flex-col gap-6">
         <div className="self-start text-2xl font-bold text-content-main">
@@ -42,7 +44,7 @@ export default function ProductDetail({ product }: Props) {
         </div>
 
         <div>
-          <ShareProductButton title={product.title} />
+          <ShareProductButton title={product.title} dict={dict} />
         </div>
       </div>
     </div>

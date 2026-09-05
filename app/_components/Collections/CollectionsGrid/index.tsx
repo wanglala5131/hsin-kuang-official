@@ -5,13 +5,20 @@ import { FunnelIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
 import Pagination from '@/app/_components/Collections/Pagination';
 import ProductCard from '@/app/_components/Collections/ProductCard';
-import type { FilterGroup, Product } from '@/app/(public)/collections/_data';
+import type { Locale } from '@/app/_lib/locale';
+import type {
+  FilterGroup,
+  Product,
+} from '@/app/[lang]/(public)/collections/_data';
+import type { Dictionary } from '@/app/[lang]/dictionaries';
 
 const PAGE_SIZE = 12;
 
 interface Props {
   products: Product[];
   filterGroups: FilterGroup[];
+  lang: Locale;
+  dict: Dictionary['collections'];
 }
 
 interface FilterPanelProps {
@@ -63,7 +70,15 @@ function FilterPanel({
   );
 }
 
-export default function CollectionsGrid({ products, filterGroups }: Props) {
+export default function CollectionsGrid({
+  products,
+  filterGroups,
+  lang,
+  dict,
+}: Props) {
+  // TODO: selectedTags is keyed by the localized tag label, so it goes
+  // stale across a language switch (the labels no longer match). Revisit
+  // once filtering is backed by real data / query params.
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -120,11 +135,11 @@ export default function CollectionsGrid({ products, filterGroups }: Props) {
 
         <div className="grid grid-cols-[1fr_auto] items-center gap-x-4 gap-y-4">
           <p className="text-md text-content-muted">
-            共
+            {dict.resultCountPrefix}
             <span className="font-bold text-content-main px-1">
               {filteredProducts.length}
             </span>
-            個
+            {dict.resultCountSuffix}
           </p>
 
           <button
@@ -133,7 +148,8 @@ export default function CollectionsGrid({ products, filterGroups }: Props) {
             className="sticky top-[76px] z-40 justify-self-end inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-border-subtle bg-background px-3 py-1.5 text-sm font-medium text-content-main shadow-sm hover:bg-border-subtle/30 lg:hidden"
           >
             <FunnelIcon className="size-4" />
-            篩選{selectedTags.length > 0 ? ` (${selectedTags.length})` : ''}
+            {dict.filter}
+            {selectedTags.length > 0 ? ` (${selectedTags.length})` : ''}
           </button>
 
           {selectedTags.length > 0 && (
@@ -154,20 +170,24 @@ export default function CollectionsGrid({ products, filterGroups }: Props) {
                 onClick={clearTags}
                 className="cursor-pointer text-sm text-content-muted underline underline-offset-4 hover:text-brand"
               >
-                清除全部
+                {dict.clearAll}
               </button>
             </div>
           )}
 
           {filteredProducts.length === 0 ? (
             <div className="col-span-2 py-20 text-center text-sm text-content-muted">
-              目前沒有符合篩選條件的產品，請試著調整篩選項目。
+              {dict.emptyState}
             </div>
           ) : (
             <div className="col-span-2">
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {paginatedProducts.map((product) => (
-                  <ProductCard key={product.slug} product={product} />
+                  <ProductCard
+                    key={product.slug}
+                    product={product}
+                    lang={lang}
+                  />
                 ))}
               </div>
 
@@ -175,6 +195,7 @@ export default function CollectionsGrid({ products, filterGroups }: Props) {
                 currentPage={currentPage}
                 totalPages={totalPages}
                 onPageChange={setCurrentPage}
+                dict={dict}
               />
             </div>
           )}
@@ -198,12 +219,14 @@ export default function CollectionsGrid({ products, filterGroups }: Props) {
         }`}
       >
         <div className="flex items-center justify-between border-b border-border-subtle/60 pb-4">
-          <h2 className="text-lg font-bold text-content-main">篩選條件</h2>
+          <h2 className="text-lg font-bold text-content-main">
+            {dict.filterDrawerTitle}
+          </h2>
           <button
             type="button"
             onClick={() => setIsFilterOpen(false)}
             className="cursor-pointer rounded-md p-2 text-content-main hover:bg-border-subtle/40"
-            aria-label="關閉篩選"
+            aria-label={dict.closeFilter}
           >
             <XMarkIcon className="size-6" />
           </button>
@@ -224,7 +247,7 @@ export default function CollectionsGrid({ products, filterGroups }: Props) {
               onClick={clearTags}
               className="cursor-pointer text-center text-sm text-content-muted underline underline-offset-4 hover:text-brand"
             >
-              清除全部篩選
+              {dict.clearAllFilters}
             </button>
           )}
           <button
@@ -232,7 +255,9 @@ export default function CollectionsGrid({ products, filterGroups }: Props) {
             onClick={() => setIsFilterOpen(false)}
             className="w-full cursor-pointer rounded-full bg-brand py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
           >
-            查看 {filteredProducts.length} 個結果
+            {dict.viewResultsPrefix}
+            {filteredProducts.length}
+            {dict.viewResultsSuffix}
           </button>
         </div>
       </div>
