@@ -2,7 +2,11 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
+import {
+  ChevronDownIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+} from '@heroicons/react/24/outline';
 
 import ArrowLink from '@/app/_components/ArrowLink';
 import SectionHeader from '@/app/_components/SectionHeader';
@@ -223,7 +227,10 @@ interface Props {
 export default function Customization({ lang, dict }: Props) {
   const [isVisible, setIsVisible] = useState(false);
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
+  const [hasMoreTagsBelow, setHasMoreTagsBelow] = useState(false);
+  const [isTagListScrollable, setIsTagListScrollable] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+  const tagListRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -242,6 +249,25 @@ export default function Customization({ lang, dict }: Props) {
 
     return () => observer.disconnect();
   }, []);
+
+  // overflow-auto alone still captures drag/scroll with nothing to scroll to — toggle it only when content actually overflows.
+  useEffect(() => {
+    const el = tagListRef.current;
+    if (!el) return;
+
+    const checkOverflow = () => {
+      setIsTagListScrollable(el.scrollHeight > el.clientHeight);
+      setHasMoreTagsBelow(el.scrollHeight - el.scrollTop - el.clientHeight > 4);
+    };
+
+    checkOverflow();
+    el.addEventListener('scroll', checkOverflow);
+    window.addEventListener('resize', checkOverflow);
+    return () => {
+      el.removeEventListener('scroll', checkOverflow);
+      window.removeEventListener('resize', checkOverflow);
+    };
+  }, [lang, activeSlideIndex]);
 
   const handlePrevSlide = () => {
     setActiveSlideIndex((prev) =>
@@ -278,6 +304,7 @@ export default function Customization({ lang, dict }: Props) {
 
       <div className="relative z-10 mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <SectionHeader
+          lang={lang}
           title={dict.title}
           subtitle={dict.subtitle}
           className="mb-12"
@@ -285,7 +312,7 @@ export default function Customization({ lang, dict }: Props) {
 
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-12 lg:gap-6">
           <div
-            className={`${cardSharedClassName} order-3 flex flex-col justify-between lg:order-1 lg:col-span-4`}
+            className={`${cardSharedClassName} order-3 flex flex-col lg:order-1 lg:col-span-4 lg:h-[420px]`}
           >
             <div>
               <h3 className={titleSharedClassName}>{dict.specsTitle}</h3>
@@ -295,7 +322,7 @@ export default function Customization({ lang, dict }: Props) {
                 {dict.specsBody2}
               </p>
             </div>
-            <div className="relative mt-4 h-40 w-full overflow-hidden rounded-lg">
+            <div className="relative mt-4 h-40 w-full overflow-hidden rounded-lg lg:h-auto lg:flex-1">
               <Image
                 src={`${IMAGE_BASE_URL}/scenarios/bag1.webp`}
                 alt={dict.specsImageAlt}
@@ -307,10 +334,10 @@ export default function Customization({ lang, dict }: Props) {
           </div>
 
           <div
-            className={`${cardSharedClassName} order-2 flex flex-col justify-between lg:order-2 lg:col-span-8`}
+            className={`${cardSharedClassName} order-2 flex flex-col justify-between sm:h-[420px] lg:order-2 lg:col-span-8`}
           >
-            <div className="flex flex-col gap-4 sm:flex-row items-center h-full">
-              <div className="flex flex-col justify-between sm:w-1/2 h-full">
+            <div className="flex flex-col gap-4 sm:flex-row h-full">
+              <div className="flex flex-col gap-4 sm:w-1/2">
                 <div>
                   <h3 className={titleSharedClassName}>{dict.stylesTitle}</h3>
                   <p className={descriptionSharedClassName}>
@@ -318,31 +345,49 @@ export default function Customization({ lang, dict }: Props) {
                   </p>
                 </div>
 
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {STYLE_SLIDES.map((slide, idx) => {
-                    const isActive = idx === activeSlideIndex;
-                    return (
-                      <button
-                        key={slide.tag.zh}
-                        type="button"
-                        onClick={() => setActiveSlideIndex(idx)}
-                        className={`cursor-pointer rounded-md px-2 py-[1px] text-sm font-medium transition-all duration-200 bg-border-subtle/50 border-2 ${
-                          isActive ? 'border-brand' : 'border-transparent'
-                        }`}
-                      >
-                        {slide.tag[lang]}
-                      </button>
-                    );
-                  })}
+                <div className="relative sm:min-h-0 sm:flex-1">
+                  <div
+                    ref={tagListRef}
+                    className={`flex flex-wrap gap-2 pr-1 sm:h-full ${
+                      isTagListScrollable
+                        ? 'overflow-y-auto overscroll-contain'
+                        : 'overflow-visible'
+                    }`}
+                  >
+                    {STYLE_SLIDES.map((slide, idx) => {
+                      const isActive = idx === activeSlideIndex;
+                      return (
+                        <button
+                          key={slide.tag.zh}
+                          type="button"
+                          onClick={() => setActiveSlideIndex(idx)}
+                          className={`cursor-pointer rounded-md px-2 py-[1px] text-sm font-medium transition-all duration-200 bg-border-subtle/50 border-2 ${
+                            isActive ? 'border-brand' : 'border-transparent'
+                          }`}
+                        >
+                          {slide.tag[lang]}
+                        </button>
+                      );
+                    })}
+                  </div>
+                  {hasMoreTagsBelow && (
+                    <div className="pointer-events-none absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-white to-transparent" />
+                  )}
                 </div>
-                <div className="flex justify-end pt-2 pr-2">
+                <div className="flex h-4 items-center justify-center">
+                  {hasMoreTagsBelow && (
+                    <ChevronDownIcon className="size-4 animate-bounce text-brand" />
+                  )}
+                </div>
+
+                <div className="flex justify-end pr-2">
                   <ArrowLink href={`/${lang}/collections`}>
                     {dict.seeMore}
                   </ArrowLink>
                 </div>
               </div>
 
-              <div className="relative h-48 w-full overflow-hidden rounded-lg  sm:h-full sm:w-1/2">
+              <div className="relative h-48 w-full overflow-hidden rounded-lg sm:h-full sm:w-1/2">
                 <Image
                   src={STYLE_SLIDES[activeSlideIndex].imageUrl}
                   alt={STYLE_SLIDES[activeSlideIndex].alt[lang]}
@@ -377,7 +422,7 @@ export default function Customization({ lang, dict }: Props) {
             className={`${cardSharedClassName} order-4 flex flex-col justify-between lg:order-3 lg:col-span-7`}
           >
             <div className="flex flex-col-reverse gap-4 sm:flex-row sm:items-center">
-              <div className="relative h-full w-full overflow-hidden rounded-lg sm:h-44 sm:w-1/2">
+              <div className="relative h-48 w-full overflow-hidden rounded-lg sm:h-44 sm:w-1/2">
                 <Image
                   src={`${IMAGE_BASE_URL}/feature/sewing.webp`}
                   alt={dict.finishingImageAlt}

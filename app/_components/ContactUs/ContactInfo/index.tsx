@@ -7,7 +7,11 @@ import {
 } from '@heroicons/react/24/outline';
 
 import { CONTACT_INFO } from '@/app/_lib/contact-info';
-import type { Locale } from '@/app/_lib/locale';
+import {
+  HEADING_FONT_CLASS,
+  HEADING_WEIGHT_CLASS,
+  type Locale,
+} from '@/app/_lib/locale';
 import type { Dictionary } from '@/app/[lang]/dictionaries';
 
 interface Props {
@@ -86,7 +90,9 @@ export function ContactInfo({ lang, dict }: Props) {
         <span className="text-xs font-semibold uppercase tracking-wider text-brand block">
           {dict.eyebrow}
         </span>
-        <h3 className="mt-2 text-2xl sm:text-3xl font-bold font-wen-kai-zh text-content-main">
+        <h3
+          className={`mt-2 text-2xl sm:text-3xl text-content-main ${HEADING_FONT_CLASS[lang]} ${HEADING_WEIGHT_CLASS[lang]}`}
+        >
           {dict.heading}
         </h3>
         <p className="mt-2 text-sm text-content-muted leading-relaxed">

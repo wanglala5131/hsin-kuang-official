@@ -16,6 +16,7 @@ export default async function ContactPage() {
   return (
     <main className="min-h-screen bg-background mt-[65px] lg:mt-[60px]">
       <PageBanner
+        lang={locale}
         imageUrl={`${IMAGE_BASE_URL}/hsin-kuang.webp`}
         imageAlt={dict.common.brandAlt}
         title={dict.pages.contactUs.bannerTitle}
@@ -29,7 +30,7 @@ export default async function ContactPage() {
             <ContactInfo lang={locale} dict={dict.contactInfo} />
           </div>
           <div className="md:col-span-6 lg:col-span-7">
-            <ContactForm dict={dict.contactForm} />
+            <ContactForm lang={locale} dict={dict.contactForm} />
           </div>
         </div>
       </div>

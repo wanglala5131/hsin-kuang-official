@@ -8,12 +8,19 @@ import {
   Bars3Icon,
   ChatBubbleLeftEllipsisIcon,
   ClipboardDocumentListIcon,
+  GlobeAltIcon,
   RectangleGroupIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
 
 import { LanguageSwitcher } from '@/app/_components/LanguageSwitcher';
-import type { Locale } from '@/app/_lib/locale';
+import {
+  HEADING_FONT_CLASS,
+  HEADING_WEIGHT_CLASS,
+  LOCALES,
+  type Locale,
+} from '@/app/_lib/locale';
+import { useLocaleSwitch } from '@/app/_lib/use-locale-switch';
 import type { Dictionary } from '@/app/[lang]/dictionaries';
 
 interface HeaderProps {
@@ -28,6 +35,7 @@ export default function Header({ lang, dict, languageDict }: HeaderProps) {
   const pathname = usePathname();
   const homeHref = `/${lang}`;
   const isHomePage = pathname === homeHref;
+  const switchLocale = useLocaleSwitch(lang);
 
   const NAV_LINKS = [
     {
@@ -88,7 +96,7 @@ export default function Header({ lang, dict, languageDict }: HeaderProps) {
                 priority
               />
               <span
-                className={`text-2xl font-bold text-brand font-wen-kai-zh transition-all ${
+                className={`text-2xl text-brand transition-all ${HEADING_FONT_CLASS[lang]} ${HEADING_WEIGHT_CLASS[lang]} ${
                   isTransparent ? 'opacity-0' : 'opacity-100'
                 }`}
               >
@@ -178,7 +186,9 @@ export default function Header({ lang, dict, languageDict }: HeaderProps) {
               height={36}
               alt="hsin kuang logo"
             />
-            <span className="text-3xl font-wen-kai-zh font-bold tracking-wider text-brand">
+            <span
+              className={`text-3xl tracking-wider text-brand ${HEADING_FONT_CLASS[lang]} ${HEADING_WEIGHT_CLASS[lang]}`}
+            >
               {dict.brand}
             </span>
           </Link>
@@ -217,7 +227,25 @@ export default function Header({ lang, dict, languageDict }: HeaderProps) {
           </nav>
 
           <div className="border-t border-border-subtle/60 pt-6">
-            <LanguageSwitcher lang={lang} dict={languageDict} />
+            <div className="flex items-center gap-2">
+              <GlobeAltIcon className="size-7" />
+              <div className="flex items-center gap-2">
+                {LOCALES.map((locale) => (
+                  <button
+                    key={locale}
+                    type="button"
+                    onClick={() => switchLocale(locale)}
+                    className={`rounded-full px-3 py-1 text-md font-medium transition-colors cursor-pointer ${
+                      locale === lang
+                        ? 'bg-brand text-background'
+                        : 'bg-border-subtle/40 text-content-main hover:bg-border-subtle/70'
+                    }`}
+                  >
+                    {languageDict[locale]}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>

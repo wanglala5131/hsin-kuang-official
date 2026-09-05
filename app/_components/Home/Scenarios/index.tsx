@@ -205,6 +205,7 @@ export default function Scenarios({ lang, dict }: Props) {
       </div>
 
       <SectionHeader
+        lang={lang}
         title={dict.title}
         subtitle={dict.subtitle}
         className="mb-6 z-10 relative"

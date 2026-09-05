@@ -1,6 +1,13 @@
 import Image from 'next/image';
 
+import {
+  HEADING_FONT_CLASS,
+  HEADING_WEIGHT_CLASS,
+  type Locale,
+} from '@/app/_lib/locale';
+
 interface Props {
+  lang: Locale;
   imageUrl: string;
   imageAlt: string;
   title: string;
@@ -9,6 +16,7 @@ interface Props {
 }
 
 export default function PageBanner({
+  lang,
   imageUrl,
   imageAlt,
   title,
@@ -30,7 +38,9 @@ export default function PageBanner({
       <span className="z-10 text-xs sm:text-sm tracking-widest text-warm-gray font-bold uppercase text-shadow-xl">
         {enTitle}
       </span>
-      <h1 className="z-10 mt-2 text-2xl sm:text-4xl font-bold text-white font-wen-kai-zh tracking-wide text-shadow-xl">
+      <h1
+        className={`z-10 mt-2 text-2xl sm:text-4xl text-white tracking-wide text-shadow-xl ${HEADING_FONT_CLASS[lang]} ${HEADING_WEIGHT_CLASS[lang]}`}
+      >
         {title}
       </h1>
     </section>

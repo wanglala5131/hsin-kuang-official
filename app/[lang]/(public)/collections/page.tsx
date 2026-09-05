@@ -19,6 +19,7 @@ export default async function CollectionsPage() {
   return (
     <main className="min-h-screen bg-background mt-[65px] lg:mt-[60px]">
       <PageBanner
+        lang={locale}
         imageUrl={`${IMAGE_BASE_URL}/speed-group.webp`}
         imageAlt={dict.common.brandAlt}
         title={dict.pages.collections.bannerTitle}

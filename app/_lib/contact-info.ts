@@ -1,9 +1,7 @@
 import type { Localized } from '@/app/_lib/locale';
 
-// Single source of truth for the factory's contact details, consumed by both
-// the Footer and the Contact page's ContactInfo panel. These used to be
-// hardcoded independently in each place and had drifted out of sync — keep
-// any future correction here instead of editing the components directly.
+// Single source of truth for contact details, shared by Footer and ContactInfo
+// (previously hardcoded independently in each, and had drifted out of sync).
 export const CONTACT_INFO = {
   phone: {
     display: {

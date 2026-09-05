@@ -26,14 +26,20 @@ export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Path already has a /zh or /en prefix — nothing to do.
-  const [, firstSegment] = pathname.split('/');
-  if (firstSegment && isLocale(firstSegment)) {
-    return NextResponse.next();
+  const segments = pathname.split('/');
+  const firstSegment = segments[1];
+  const lowerFirstSegment = firstSegment?.toLowerCase();
+  if (lowerFirstSegment && isLocale(lowerFirstSegment)) {
+    if (firstSegment === lowerFirstSegment) return NextResponse.next();
+
+    // Same locale, wrong case (e.g. `/EN/...`) — normalize instead of
+    // treating it as unprefixed and double-prefixing it below.
+    const nextUrl = request.nextUrl.clone();
+    segments[1] = lowerFirstSegment;
+    nextUrl.pathname = segments.join('/');
+    return NextResponse.redirect(nextUrl);
   }
 
-  // No locale in the path yet: figure out which one to use and redirect there.
-  // (Root path gets `/en`, not `/en/` — the trailing slash would otherwise
-  // cost a second redirect through Next's own trailing-slash normalization.)
   const locale = resolveLocale(request);
   const nextUrl = request.nextUrl.clone();
   nextUrl.pathname = pathname === '/' ? `/${locale}` : `/${locale}${pathname}`;

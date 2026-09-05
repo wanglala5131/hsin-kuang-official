@@ -9,7 +9,7 @@ export default async function Home() {
 
   return (
     <main>
-      <Banner dict={dict.home.banner} />
+      <Banner lang={locale} dict={dict.home.banner} />
       <About lang={locale} dict={dict.home.about} />
       <Scenarios lang={locale} dict={dict.home.scenarios} />
       <Customization lang={locale} dict={dict.home.customization} />

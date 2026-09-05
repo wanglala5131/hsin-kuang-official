@@ -19,7 +19,7 @@
   "footer": {
     "brand": "HSIN-KUANG",
     "brandAlt": "Hsin Kuang",
-    "tagline": "Custom webbing manufacturer — braided cords, high-speed webbing, and more.",
+    "tagline": "Custom webbing manufacturer \n— braided cords, high-speed webbing, and more.",
     "phone": "Phone",
     "email": "E-mail",
     "fax": "Fax",
@@ -32,7 +32,7 @@
     "banner": {
       "since": "since 1986",
       "brand": "HSIN-KUANG",
-      "subheading": "HSIN KWANG WEBBING MILLS",
+      "subheading": "Custom Webbing & Cord Manufacturer",
       "sloganLine1": "Four decades of experience,",
       "sloganLine2": "dedicated to the quality and craft of every kind of webbing.",
       "scroll": "SCROLL",
@@ -40,7 +40,7 @@
     },
     "about": {
       "title": "About Us",
-      "subtitle": "OUR STORY",
+      "subtitle": "OUR CRAFT",
       "badge": "100% Made in Taiwan",
       "heading": "Meticulous Quality, Custom-Engineered Weaving",
       "body": "With 40 years rooted in Taiwan, we focus on high-quality weaving and custom service. Drawing on decades of hands-on experience, we recommend the right materials and structures for your actual use case, and can handle printing, sewing, and other finishing in-house — saving you the hassle of coordinating multiple vendors.",
@@ -60,13 +60,13 @@
       "specsBody1": "Choose from a wide range of materials — polyester, nylon, pure cotton, and various performance yarns.",
       "specsBody2": "Color, material, dimensions, thickness, elasticity, and core filling can all be highly customized to your needs.",
       "specsImageAlt": "Webbing specs and materials",
-      "stylesTitle": "A Range of Styles",
+      "stylesTitle": "Style Options",
       "seeMore": "See More",
       "finishingTitle": "Finishing & Processing",
       "finishingBody1": "We handle a full range of finishing work for webbing.",
       "finishingBody2": "Including heat-transfer printing, plate printing, custom-length cutting, tipping, and more.",
       "finishingImageAlt": "Finishing and processing work",
-      "unsureTitle": "Not Sure About Materials or Methods?",
+      "unsureTitle": "Not Sure What to Choose?",
       "unsureBody1": "No problem — just reach out to us directly.",
       "unsureBody2": "Tell us your intended use and requirements, and we'll recommend the best approach, suitable materials, and a fair quote.",
       "adviceImageAlt": "Recommendations based on intended use",
@@ -93,7 +93,7 @@
       "bannerTitle": "Customization",
       "bannerEnTitle": "MADE TO ORDER",
       "sectionTitle": "Customization Options",
-      "sectionSubtitle": "Select a tab to learn more"
+      "sectionSubtitle": "Select an option to learn more"
     },
     "contactUs": {
       "metaTitle": "Contact Us | HSIN-KUANG Webbing",
@@ -147,7 +147,7 @@
     "messageLabel": "Details",
     "messagePlaceholder": "Please describe the webbing specs (width, material, color), estimated order quantity, or lead time needed...",
     "submitting": "Submitting...",
-    "submit": "Submit Inquiry",
+    "submit": "Submit",
     "closePreview": "Close"
   },
   "contactInfo": {

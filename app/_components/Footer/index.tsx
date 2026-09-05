@@ -2,7 +2,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { CONTACT_INFO } from '@/app/_lib/contact-info';
-import type { Locale } from '@/app/_lib/locale';
+import {
+  HEADING_FONT_CLASS,
+  HEADING_WEIGHT_CLASS,
+  type Locale,
+} from '@/app/_lib/locale';
 import type { Dictionary } from '@/app/[lang]/dictionaries';
 
 interface FooterProps {
@@ -33,11 +37,13 @@ export default function Footer({ lang, dict }: FooterProps) {
               className="h-10 w-auto object-contain"
               priority={false}
             />
-            <span className="font-wen-kai-zh text-3xl font-bold tracking-wider text-brand transition-opacity group-hover:opacity-90">
+            <span
+              className={`text-3xl tracking-wider text-brand transition-opacity group-hover:opacity-90 ${HEADING_FONT_CLASS[lang]} ${HEADING_WEIGHT_CLASS[lang]}`}
+            >
               {dict.brand}
             </span>
           </Link>
-          <p className="text-xs text-content-muted tracking-widest pl-0.5">
+          <p className="text-xs text-content-muted tracking-widest pl-0.5 whitespace-pre-line">
             {dict.tagline}
           </p>
         </div>

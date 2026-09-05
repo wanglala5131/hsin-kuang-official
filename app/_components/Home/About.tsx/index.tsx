@@ -5,7 +5,11 @@ import Image from 'next/image';
 
 import ArrowLink from '@/app/_components/ArrowLink';
 import SectionHeader from '@/app/_components/SectionHeader';
-import type { Locale } from '@/app/_lib/locale';
+import {
+  HEADING_FONT_CLASS,
+  HEADING_WEIGHT_CLASS,
+  type Locale,
+} from '@/app/_lib/locale';
 import type { Dictionary } from '@/app/[lang]/dictionaries';
 
 const IMAGE_BASE_URL = process.env.NEXT_PUBLIC_IMAGE_BASE_URL;
@@ -40,7 +44,7 @@ export default function About({ lang, dict }: Props) {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full overflow-x-clip pt-20 sm:py-28"
+      className="relative w-full overflow-x-clip pt-20 pb-16 sm:py-28"
     >
       <div
         className={`transition-all duration-700 ease-out ${
@@ -48,6 +52,7 @@ export default function About({ lang, dict }: Props) {
         }`}
       >
         <SectionHeader
+          lang={lang}
           title={dict.title}
           subtitle={dict.subtitle}
           className="mb-12"
@@ -101,7 +106,9 @@ export default function About({ lang, dict }: Props) {
             {dict.badge}
           </div>
 
-          <h2 className="mt-3 font-wen-kai-zh text-2xl font-bold tracking-tight text-content-main sm:text-3xl md:mt-5 lg:text-4xl">
+          <h2
+            className={`mt-3 text-2xl tracking-tight text-content-main sm:text-3xl md:mt-5 lg:text-4xl ${HEADING_FONT_CLASS[lang]} ${HEADING_WEIGHT_CLASS[lang]}`}
+          >
             {dict.heading}
           </h2>
 

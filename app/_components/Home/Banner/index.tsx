@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
+import { HEADING_FONT_CLASS, type Locale } from '@/app/_lib/locale';
 import type { Dictionary } from '@/app/[lang]/dictionaries';
 
 import BannerIndicator, { CirclePhase } from './BannerIndicator';
@@ -21,10 +22,11 @@ const TRANSITION_TIME = 1000; // clear time
 const TOTAL_SLIDE_TIME = DISPLAY_TIME + TRANSITION_TIME; // 5000ms
 
 interface Props {
+  lang: Locale;
   dict: Dictionary['home']['banner'];
 }
 
-export default function Banner({ dict }: Props) {
+export default function Banner({ lang, dict }: Props) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [phase, setPhase] = useState<CirclePhase>(CirclePhase.Idle);
   const [isInitialMount, setIsInitialMount] = useState(true);
@@ -89,15 +91,23 @@ export default function Banner({ dict }: Props) {
 
       <div className="absolute inset-0 bg-black/20 z-10 pointer-events-none" />
 
-      <div className="absolute w-full p-1 z-30 top-1/2 left-1/2 md:left-1/7 -translate-x-1/2 md:-translate-x-0 -translate-y-1/2 text-white text-center md:text-left">
+      <div className="absolute w-full px-6 py-1 md:p-1 z-30 top-1/2 left-1/2 md:left-1/7 -translate-x-1/2 md:-translate-x-0 -translate-y-1/2 text-white text-center md:text-left">
         <p className="text-shadow-md text-white/80">{dict.since}</p>
-        <h1 className="font-wen-kai-zh text-5xl/15 md:text-6xl/17 text-shadow-xl tracking-widest">
+        <h1
+          className={`text-5xl/15 md:text-6xl/17 text-shadow-xl tracking-widest ${HEADING_FONT_CLASS[lang]}`}
+        >
           {dict.brand}
         </h1>
         <h2 className="text-3xl/8 md:text-3xl/10 text-shadow-md text-white/90">
           {dict.subheading}
         </h2>
-        <p className="font-wen-kai-zh text-[26px] md:text-4xl/12 text-shadow-sm mt-12 font-thin md:flex before:h-[calc(100% + 10px)] before:w-[2px] before:bg-white/60 before:block before:mr-4">
+        <p
+          className={`text-shadow-sm mt-12 font-thin md:flex before:h-[calc(100% + 10px)] before:w-[2px] before:bg-white/60 before:block before:mr-4 ${HEADING_FONT_CLASS[lang]} ${
+            lang === 'zh'
+              ? 'text-2xl/8 md:text-4xl/12'
+              : 'text-xl/8 md:text-2xl/9'
+          }`}
+        >
           {dict.sloganLine1}
           <br />
           {dict.sloganLine2}

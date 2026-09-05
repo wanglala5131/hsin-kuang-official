@@ -1,8 +1,7 @@
 import type { Locale, Localized } from '@/app/_lib/locale';
 
-// Icon components are functions, and functions aren't serializable across
-// the Server -> Client Component boundary, so icons are looked up by `id`
-// on the client (in CustomizationDeck) instead of traveling through this data.
+// Icons aren't serializable across the Server -> Client boundary, so they're
+// looked up by `id` on the client (in CustomizationDeck) instead of here.
 export interface CustomizationItem {
   id: string;
   title: string;

@@ -15,6 +15,11 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline';
 
+import {
+  HEADING_FONT_CLASS,
+  HEADING_WEIGHT_CLASS,
+  type Locale,
+} from '@/app/_lib/locale';
 import type { Dictionary } from '@/app/[lang]/dictionaries';
 
 interface FormDataState {
@@ -27,6 +32,7 @@ interface FormDataState {
 }
 
 interface Props {
+  lang: Locale;
   dict: Dictionary['contactForm'];
 }
 
@@ -52,7 +58,7 @@ function FormField({ id, label, required, children }: FormFieldProps) {
   );
 }
 
-export function ContactForm({ dict }: Props) {
+export function ContactForm({ lang, dict }: Props) {
   const [formData, setFormData] = useState<FormDataState>({
     name: '',
     email: '',
@@ -117,7 +123,9 @@ export function ContactForm({ dict }: Props) {
         <span className="text-xs font-semibold uppercase tracking-wider text-brand block">
           {dict.eyebrow}
         </span>
-        <h2 className="mt-2 text-2xl sm:text-3xl font-bold text-content-main font-wen-kai-zh">
+        <h2
+          className={`mt-2 text-2xl sm:text-3xl text-content-main ${HEADING_FONT_CLASS[lang]} ${HEADING_WEIGHT_CLASS[lang]}`}
+        >
           {dict.heading}
         </h2>
         <p className="mt-2 text-sm text-content-muted leading-relaxed">

@@ -14,6 +14,11 @@ import {
 } from '@heroicons/react/24/solid';
 
 import ImageWithSpinner from '@/app/_components/ImageWithSpinner';
+import {
+  HEADING_FONT_CLASS,
+  HEADING_WEIGHT_CLASS,
+  type Locale,
+} from '@/app/_lib/locale';
 import type { CustomizationItem } from '@/app/[lang]/(public)/customization/_data';
 
 const PALETTE = ['bg-background', 'bg-warm-gray/30'];
@@ -130,10 +135,12 @@ function MobileMenu({ items, activeId, onSelect }: MobileMenuProps) {
 function ContentPanel({
   item,
   index,
+  lang,
   renderImage,
 }: {
   item: CustomizationItem;
   index: number;
+  lang: Locale;
   // Only the shown (or animating-out) panel should fire an image request —
   // every other panel stays mounted for sizing but must not fetch its image.
   renderImage: boolean;
@@ -144,7 +151,9 @@ function ContentPanel({
     <div
       className={`flex h-full min-h-full flex-col gap-4 border border-warm-gray/30 bg-background p-6 md:border-0 md:p-8 ${CONTENT_PALETTE_DESKTOP[index % CONTENT_PALETTE_DESKTOP.length]}`}
     >
-      <h3 className="flex items-center font-wen-kai-zh text-2xl font-bold text-brand md:text-3xl">
+      <h3
+        className={`flex items-center text-2xl text-brand md:text-3xl ${HEADING_FONT_CLASS[lang]} ${HEADING_WEIGHT_CLASS[lang]}`}
+      >
         <Icon className="mr-2 size-8 shrink-0" />
         {item.title}
       </h3>
@@ -184,10 +193,11 @@ function ContentPanel({
 }
 
 interface Props {
+  lang: Locale;
   items: CustomizationItem[];
 }
 
-export default function CustomizationDeck({ items }: Props) {
+export default function CustomizationDeck({ lang, items }: Props) {
   const [activeId, setActiveId] = useState(items[0].id);
   const [outgoing, setOutgoing] = useState<{
     id: string;
@@ -220,7 +230,8 @@ export default function CustomizationDeck({ items }: Props) {
           const isActive = item.id === activeId;
           const isOutgoing = outgoing?.id === item.id;
 
-          let animationClass = 'invisible';
+          // Mobile: inactive panels are removed from layout so height tracks the active one; desktop keeps them invisible instead, so height stays constant.
+          let animationClass = 'hidden md:block md:invisible';
           if (outgoing && outgoing.id === item.id) {
             animationClass =
               outgoing.direction === 'forward'
@@ -242,6 +253,7 @@ export default function CustomizationDeck({ items }: Props) {
               <ContentPanel
                 item={item}
                 index={index}
+                lang={lang}
                 renderImage={isActive || isOutgoing}
               />
             </div>

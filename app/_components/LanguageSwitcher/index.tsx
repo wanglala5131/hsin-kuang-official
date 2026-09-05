@@ -1,12 +1,11 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
 import { CheckIcon } from '@heroicons/react/20/solid';
 import { GlobeAltIcon } from '@heroicons/react/24/outline';
 
 import { LOCALES, type Locale } from '@/app/_lib/locale';
-import { setLocaleCookie } from '@/app/_lib/set-locale-cookie';
+import { useLocaleSwitch } from '@/app/_lib/use-locale-switch';
 import type { Dictionary } from '@/app/[lang]/dictionaries';
 
 interface LanguageSwitcherProps {
@@ -22,8 +21,7 @@ export function LanguageSwitcher({
 }: LanguageSwitcherProps) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const pathname = usePathname();
-  const router = useRouter();
+  const switchLocale = useLocaleSwitch(lang);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -41,16 +39,7 @@ export function LanguageSwitcher({
 
   const handleSelectLanguage = (locale: Locale) => {
     setIsOpen(false);
-    if (locale === lang) return;
-
-    // Swap the leading /zh or /en segment of the current path and remember
-    // the choice so the proxy honors it on the next visit to an un-prefixed URL.
-    const segments = pathname.split('/');
-    segments[1] = locale;
-    const nextPath = segments.join('/');
-
-    setLocaleCookie(locale);
-    router.push(nextPath);
+    switchLocale(locale);
   };
 
   return (

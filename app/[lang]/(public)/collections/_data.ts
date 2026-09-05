@@ -33,9 +33,8 @@ type TagId =
   | 'anti-slip-finish'
   | 'woven-pattern';
 
-// Display labels are resolved from this canonical ID so a translated label
-// can never drift from the ID used for filter matching (see getProducts /
-// getFilterGroups below, which always resolve both sides from this map).
+// Labels resolve from this canonical ID so a translated label can never
+// drift from the ID used for filter matching.
 const TAG_LABELS: Record<TagId, Localized<string>> = {
   'wrist-strap': { zh: '手腕帶', en: 'Wrist Strap' },
   shoelace: { zh: '鞋帶', en: 'Shoelace' },

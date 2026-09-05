@@ -4,6 +4,7 @@ import {
   getPageDictionary,
   getSectionMetadata,
 } from '@/app/_lib/get-page-dictionary';
+import { HEADING_FONT_CLASS, HEADING_WEIGHT_CLASS } from '@/app/_lib/locale';
 import { getCustomizationItems } from '@/app/[lang]/(public)/customization/_data';
 
 const IMAGE_BASE_URL = process.env.NEXT_PUBLIC_IMAGE_BASE_URL;
@@ -17,6 +18,7 @@ export default async function CustomizationPage() {
   return (
     <main className="min-h-screen bg-background mt-[65px] lg:mt-[60px]">
       <PageBanner
+        lang={locale}
         imageUrl={`${IMAGE_BASE_URL}/customization/pet-rope.webp`}
         imageAlt={dict.common.brandAlt}
         title={dict.pages.customization.bannerTitle}
@@ -25,7 +27,9 @@ export default async function CustomizationPage() {
 
       <div className="py-8 lg:py-12">
         <div className="mx-auto mb-7 lg:mb-12 max-w-3xl px-4 text-center sm:px-6 lg:px-8">
-          <h2 className="font-wen-kai-zh text-2xl font-bold text-content-main sm:text-3xl">
+          <h2
+            className={`text-2xl text-content-main sm:text-3xl ${HEADING_FONT_CLASS[locale]} ${HEADING_WEIGHT_CLASS[locale]}`}
+          >
             {dict.pages.customization.sectionTitle}
           </h2>
           <p className="mt-2 text-md text-content-muted">
@@ -33,7 +37,7 @@ export default async function CustomizationPage() {
           </p>
         </div>
 
-        <CustomizationDeck items={items} />
+        <CustomizationDeck lang={locale} items={items} />
       </div>
     </main>
   );

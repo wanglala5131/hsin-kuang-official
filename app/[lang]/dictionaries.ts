@@ -2,11 +2,13 @@ import 'server-only';
 
 import type { Locale } from '@/app/_lib/locale';
 
-const dictionaries = {
-  zh: () => import('./dictionaries/zh.json').then((module) => module.default),
-  en: () => import('./dictionaries/en.json').then((module) => module.default),
-};
+import en from './dictionaries/en.json';
+import zh from './dictionaries/zh.json';
 
-export const getDictionary = async (locale: Locale) => dictionaries[locale]();
+const dictionaries = { zh, en };
+
+export async function getDictionary(locale: Locale) {
+  return dictionaries[locale];
+}
 
 export type Dictionary = Awaited<ReturnType<typeof getDictionary>>;
