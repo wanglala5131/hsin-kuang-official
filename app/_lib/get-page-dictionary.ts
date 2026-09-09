@@ -11,7 +11,7 @@ import { getDictionary } from '@/app/[lang]/dictionaries';
 // dedupes the root-param + dictionary lookup to once per request.
 export const getPageDictionary = cache(async () => {
   const locale = await lang();
-  if (!isLocale(locale)) notFound();
+  if (!locale || !isLocale(locale)) notFound();
 
   const dict = await getDictionary(locale);
   return { locale, dict };

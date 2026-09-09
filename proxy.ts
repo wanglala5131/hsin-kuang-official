@@ -25,6 +25,11 @@ function resolveLocale(request: NextRequest): Locale {
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // zh-only admin panel lives outside the [lang] tree — never locale-prefix it.
+  if (pathname === '/admin' || pathname.startsWith('/admin/')) {
+    return NextResponse.next();
+  }
+
   // Path already has a /zh or /en prefix — nothing to do.
   const segments = pathname.split('/');
   const firstSegment = segments[1];
