@@ -12,7 +12,7 @@ import {
 
 const NAV_LINKS = [
   { name: '貨單管理', href: '/admin', icon: TruckIcon },
-  { name: '產品管理', href: '/admin/products', icon: ArchiveBoxIcon },
+  { name: '產品管理', href: '/admin/collections', icon: ArchiveBoxIcon },
   { name: '訊息管理', href: '/admin/messages', icon: ChatBubbleLeftRightIcon },
   { name: '資料管理', href: '/admin/data', icon: DocumentTextIcon },
 ];
