@@ -2,8 +2,8 @@
 
 import {
   ChangeEvent,
-  FormEvent,
   ReactNode,
+  SubmitEvent,
   useEffect,
   useMemo,
   useState,
@@ -110,7 +110,7 @@ export function ContactForm({ lang, dict }: Props) {
     setFiles((prev) => prev.filter((_, i) => i !== index));
   };
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     // TODO: 送出處理邏輯
